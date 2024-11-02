@@ -17,7 +17,9 @@ Imports:
     dplyr,
     readr,
     httr,
-    stringr
+    stringr,
+    sf,
+    zip
 Suggests:
     testthat (>= 3.0.0),
     knitr,
