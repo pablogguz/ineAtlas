@@ -24,8 +24,8 @@ The data is organized into several categories and is available at three geograph
 | Income sources | Income indicators by source (wages, pensions, benefits, etc.) |
 | Demographics | Population characteristics including age structure and household composition |
 | Distribution by sex | Income distribution indicators disaggregated by sex |
-| Distribution by sex & age | Income distribution indicators by sex and age categories |
-| Distribution by sex, age & nationality | Income distribution indicators by sex and nationality status |
+| Distribution by sex and age | Income distribution indicators by sex and age categories |
+| Distribution by sex, age and nationality | Income distribution indicators by sex and nationality status |
 | Inequality indicators | Inequality metrics including Gini coefficient and P80/P20 ratio |
 
 All the data is stored in the accompanying [`ineAtlas.data`] repository. You can find the data dictionary and more information about the data structure at  [https://pablogguz.github.io/ineAtlas.data](https://pablogguz.github.io/ineAtlas.data).
