@@ -228,7 +228,7 @@ process_ine_data <- function(indicator_type) {
   }
 
   # Load and process files
-  cat("\nReading files...")
+  cat("\nReading files...\n")
 
   data_list <- list()
   for(file in indicator_files) {
@@ -242,7 +242,7 @@ process_ine_data <- function(indicator_type) {
   }
   
   # Combine files
-  cat("\nBinding rows...")
+  cat("\nBinding rows...\n")
   all_data <- bind_rows(data_list)
   
   # Convert Total to numeric
