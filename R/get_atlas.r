@@ -1,0 +1,126 @@
+#' Fetch data from the ineAtlas data repository
+#' 
+#' @param category Character string specifying the data category. Must be one of:
+#'   "income", "income_sources", "demographics", "distribution_sex",
+#'   "distribution_sex_age", or "distribution_sex_nationality"
+#' @param level Character string specifying the geographic level. Must be one of:
+#'   "municipality", "district", or "section"
+#' @param cache Logical indicating whether to cache the downloaded data. Default is TRUE.
+#' @param cache_dir Character string specifying the cache directory. Default is tempdir().
+#' 
+#' @return A tibble containing the requested data. Distribution data will include
+#'   additional columns for demographic breakdowns (sex, age, nationality).
+#' 
+#' @examples
+#' # Get municipality level income data
+#' income_data <- get_atlas("income", "municipality")
+#' 
+#' # Get district level demographics without caching
+#' demo_data <- get_atlas("demographics", "district", cache = FALSE)
+#' 
+#' # Get income distribution by sex
+#' sex_dist <- get_atlas("distribution_sex", "municipality")
+#' 
+#' # Get income distribution by sex and age
+#' age_dist <- get_atlas("distribution_sex_age", "district")
+get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
+  # Validate inputs
+  valid_categories <- c(
+    "income", 
+    "income_sources", 
+    "demographics",
+    "distribution_sex",
+    "distribution_sex_age",
+    "distribution_sex_nationality"
+  )
+  
+  valid_levels <- c("municipality", "district", "section")
+  
+  if (!category %in% valid_categories) {
+    stop("Category must be one of: ", paste(valid_categories, collapse = ", "))
+  }
+  if (!level %in% valid_levels) {
+    stop("Level must be one of: ", paste(valid_levels, collapse = ", "))
+  }
+  
+  # Construct the GitHub raw content URL
+  base_url <- "https://raw.githubusercontent.com/pablogguz/ineAtlas.data/main"
+  
+  # Determine the correct filename based on category
+  if (category == "distribution_sex") {
+    filename <- paste0("distribution_sex/income_heterogeneity_sex_", level, ".csv")
+  } else if (category == "distribution_sex_age") {
+    filename <- paste0("distribution_sex_age/income_heterogeneity_sex_age_", level, ".csv")
+  } else if (category == "distribution_sex_nationality") {
+    filename <- paste0("distribution_sex_nationality/income_heterogeneity_sex_nationality_", level, ".csv")
+  } else {
+    filename <- paste0(category, "/", category, "_", level, ".csv")
+  }
+  
+  url <- file.path(base_url, filename)
+  
+  # Set up caching
+  if (cache) {
+    cache_file <- file.path(cache_dir, paste0("ineatlas_", category, "_", level, ".csv"))
+    
+    # Check if cached file exists and is less than 24 hours old
+    if (file.exists(cache_file)) {
+      file_age <- difftime(Sys.time(), file.mtime(cache_file), units = "hours")
+      if (file_age < 24) {
+        message("Using cached data from ", basename(cache_file))
+        data <- readr::read_csv(cache_file, show_col_types = FALSE)
+        message("Data successfully loaded from cache: ", nrow(data), " rows, ", ncol(data), " columns")
+        return(data)
+      }
+    }
+  }
+  
+  # Try to download the data
+  tryCatch({
+    message("Downloading data from ", basename(filename), "...")
+    # Download with a timeout of 60 seconds
+    options(timeout = 60)
+    
+    # Use httr for better error handling
+    response <- httr::GET(url)
+    
+    # Check for HTTP errors
+    httr::stop_for_status(response)
+    
+    # Read the content
+    data <- readr::read_csv(
+      rawToChar(response$content),
+      show_col_types = FALSE
+    )
+    
+    # Cache the data if requested
+    if (cache) {
+      message("Caching data to ", basename(cache_file))
+      dir.create(cache_dir, showWarnings = FALSE, recursive = TRUE)
+      readr::write_csv(data, cache_file)
+    }
+    
+    message("Data successfully loaded: ", nrow(data), " rows, ", ncol(data), " columns")
+    
+    # Add helpful message for distribution data
+    if (grepl("distribution_", category)) {
+      cols <- names(data)
+      demographic_cols <- cols[!cols %in% c("mun_code", "mun_name", "district_code", "section_code", "year")]
+      message("\nDemographic breakdown columns: ", paste(demographic_cols[1:min(5, length(demographic_cols))], collapse = ", "), 
+              if(length(demographic_cols) > 5) "..." else "")
+    }
+    
+    return(data)
+    
+  }, error = function(e) {
+    # Check for cached data if download fails
+    if (cache && file.exists(cache_file)) {
+      warning("Download failed, using cached data. Error: ", e$message)
+      data <- readr::read_csv(cache_file, show_col_types = FALSE)
+      message("Data successfully loaded from cache: ", nrow(data), " rows, ", ncol(data), " columns")
+      return(data)
+    } else {
+      stop("Failed to download data and no cache available. Error: ", e$message)
+    }
+  })
+}

@@ -1,0 +1,21 @@
+INFO [2024-11-02 02:13:59] Starting data processing pipeline
+INFO [2024-11-02 02:13:59] Log file: logs/process_log_20241102_021357.log
+INFO [2024-11-02 02:14:00] Starting Income
+WARN [2024-11-02 02:14:00] Warning in Income : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1a_income.r': No such file or directory
+INFO [2024-11-02 02:14:00] Starting Income Sources
+WARN [2024-11-02 02:14:00] Warning in Income Sources : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1b_income_sources.r': No such file or directory
+INFO [2024-11-02 02:14:00] Starting Demographics
+WARN [2024-11-02 02:14:00] Warning in Demographics : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1c_demographics.r': No such file or directory
+INFO [2024-11-02 02:14:00] Starting Distribution by Sex
+WARN [2024-11-02 02:14:00] Warning in Distribution by Sex : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1d_distribution_sex.r': No such file or directory
+INFO [2024-11-02 02:14:00] Starting Distribution by Sex and Age
+WARN [2024-11-02 02:14:00] Warning in Distribution by Sex and Age : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1e_distribution_sex_age.r': No such file or directory
+INFO [2024-11-02 02:14:00] Starting Distribution by Sex and Nationality
+WARN [2024-11-02 02:14:00] Warning in Distribution by Sex and Nationality : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1f_distribution_sex_age_nationality.r': No such file or directory
+INFO [2024-11-02 02:14:00] Starting Gini and P80/P20
+WARN [2024-11-02 02:14:00] Warning in Gini and P80/P20 : cannot open file 'C:/Users/pablo/Documents/GitHub/ineAtlas/scripts/1g_gini_p80p20.r': No such file or directory
+INFO [2024-11-02 02:14:00] Processing Summary:
+INFO [2024-11-02 02:14:00] Total duration: 0.01 minutes
+INFO [2024-11-02 02:14:00] Script status:
+INFO [2024-11-02 02:14:01] Final status: SUCCESS
+INFO [2024-11-02 02:14:01] Data processing pipeline completed
