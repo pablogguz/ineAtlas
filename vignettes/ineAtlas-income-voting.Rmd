@@ -29,6 +29,7 @@ This vignette demonstrates how to combine data from the Spanish Statistical Offi
 
 ```{r packages}
 library(dplyr)
+library(tidyr)
 library(ineAtlas)
 library(extrafont)
 library(data.table)
