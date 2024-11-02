@@ -12,7 +12,6 @@ The goal of `ineAtlas` package is to provide easy access to granular socioeconom
 
 The data is organized into several categories and is available at three geographic levels:
 
-### Geographic levels
 - Municipality (_Municipio_)
 - District (_Distrito_)
 - Census tract (_Sección censal_)
