@@ -1,5 +1,6 @@
 url: https://pablogguz.github.io/ineAtlas/
 template:
+  light-switch: true
   bootstrap: 5
   opengraph:
     twitter:
