@@ -14,16 +14,24 @@ get_atlas(category, level, cache = TRUE, cache_dir = tempdir())
 \item{level}{Character string specifying the geographic level. Must be one of:
 "municipality", "district", or "section"}
 
-\item{cache}{Logical indicating whether to cache the downloaded data. Default is TRUE.}
+\item{cache}{Logical indicating whether to cache the extracted data. Default is TRUE.
+Cached data is stored uncompressed for faster access.}
 
 \item{cache_dir}{Character string specifying the cache directory. Default is tempdir().}
 }
 \value{
 A tibble containing the requested data. Distribution data will include
 additional columns for demographic breakdowns (sex, age, nationality).
+The data is automatically extracted from compressed files and cached
+locally if requested.
 }
 \description{
-Fetch data from the ineAtlas data repository
+Downloads and extracts compressed data files from the ineAtlas repository,
+providing access to various socioeconomic indicators at different geographic levels.
+}
+\note{
+Data files are stored compressed on the repository to reduce size and
+download times. The function handles decompression automatically.
 }
 \examples{
 # Get municipality level income data
@@ -37,4 +45,5 @@ sex_dist <- get_atlas("distribution_sex", "municipality")
 
 # Get income distribution by sex and age
 age_dist <- get_atlas("distribution_sex_age", "district")
+
 }

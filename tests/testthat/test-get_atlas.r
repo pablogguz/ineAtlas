@@ -81,10 +81,31 @@ test_that("get_atlas validates input parameters correctly", {
 })
 
 test_that("get_atlas constructs correct URLs for zip files", {
-  expected_url <- "https://raw.githubusercontent.com/pablogguz/ineAtlas.data/main/income/income_municipality.zip"
+  expected_url <- "https://raw.githubusercontent.com/pablogguz/ineAtlas.data/main/data/income/income_municipality.zip"
   
   # Store the URL that GET is called with
   called_url <- NULL
+  
+  # Create temporary directory for our test files
+  temp_dir <- tempfile()
+  dir.create(temp_dir)
+  on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+  
+  # Create a mock temporary CSV file with full path
+  temp_csv <- file.path(temp_dir, "mock_data.csv")
+  write.csv(data.frame(
+    mun_code = "28001",
+    mun_name = "Madrid",
+    year = 2021,
+    net_income_pc = 25000
+  ), temp_csv, row.names = FALSE)
+  
+  # Mock list.files to return the full path to our CSV
+  stub(get_atlas, 'list.files', function(path, pattern, full.names = FALSE) {
+    if(full.names) return(temp_csv)
+    return("mock_data.csv")
+  })
+  
   stub(
     get_atlas,
     'httr::GET',
@@ -94,11 +115,21 @@ test_that("get_atlas constructs correct URLs for zip files", {
     }
   )
   
-  # Mock the unzip and write_disk functions
-  stub(get_atlas, 'httr::write_disk', mock_write_disk)
-  stub(get_atlas, 'utils::unzip', function(...) NULL)
+  stub(get_atlas, 'httr::write_disk', function(path, overwrite = TRUE) {
+    function(resp) {
+      # Write the mock content to the path
+      writeBin(resp$content, path)
+      resp
+    }
+  })
   
-  get_atlas("income", "municipality", cache = FALSE)
+  stub(get_atlas, 'utils::unzip', function(zipfile, exdir) {
+    # Copy our mock CSV to the extraction directory using full paths
+    file.copy(temp_csv, file.path(exdir, basename(temp_csv)))
+  })
+  
+  result <- get_atlas("income", "municipality", cache = FALSE)
+  
   expect_equal(called_url, expected_url)
 })
 

@@ -53,7 +53,7 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
   }
   
   # Construct the GitHub raw content URL
-  base_url <- "https://raw.githubusercontent.com/pablogguz/ineAtlas.data/main"
+  base_url <- "https://raw.githubusercontent.com/pablogguz/ineAtlas.data/main/data"
   
   # Determine the correct filename based on category (now using .zip extension)
   if (category == "distribution_sex") {
