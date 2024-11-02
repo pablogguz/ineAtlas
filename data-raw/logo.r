@@ -59,4 +59,4 @@ sticker_pkg <- sticker(
 )
 
 # Generate string to copy-paste into README
-use_logo("inst/figures/logo.png", geometry = "480x556", retina = TRUE)
+usethis::use_logo("inst/figures/logo.png", geometry = "480x556", retina = TRUE)

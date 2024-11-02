@@ -40,10 +40,10 @@ income_data <- get_atlas("income", "municipality")
 # Get district level demographics without caching
 demo_data <- get_atlas("demographics", "district", cache = FALSE)
 
-# Get income distribution by sex
+# Get income distribution indicators by sex
 sex_dist <- get_atlas("distribution_sex", "municipality")
 
-# Get income distribution by sex and age
+# Get income distribution indicators by sex and age
 age_dist <- get_atlas("distribution_sex_age", "district")
 
 }

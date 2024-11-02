@@ -17,6 +17,13 @@
 #'   The data is automatically extracted from compressed files and cached
 #'   locally if requested.
 #' 
+#' @importFrom dplyr %>% filter select mutate
+#' @importFrom readr read_csv write_csv
+#' @importFrom httr GET stop_for_status
+#' @importFrom stringr str_extract str_remove str_trim
+#' 
+#' @export
+#' 
 #' @examples
 #' # Get municipality level income data
 #' income_data <- get_atlas("income", "municipality")
@@ -24,10 +31,10 @@
 #' # Get district level demographics without caching
 #' demo_data <- get_atlas("demographics", "district", cache = FALSE)
 #' 
-#' # Get income distribution by sex
+#' # Get income distribution indicators by sex
 #' sex_dist <- get_atlas("distribution_sex", "municipality")
 #' 
-#' # Get income distribution by sex and age
+#' # Get income distribution indicators by sex and age
 #' age_dist <- get_atlas("distribution_sex_age", "district")
 #' 
 #' @note Data files are stored compressed on the repository to reduce size and
@@ -57,11 +64,11 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
   
   # Determine the correct filename based on category (now using .zip extension)
   if (category == "distribution_sex") {
-    filename <- paste0("distribution_sex/income_heterogeneity_sex_", level, ".zip")
+    filename <- paste0("distribution_sex/distribution_sex_", level, ".zip")
   } else if (category == "distribution_sex_age") {
-    filename <- paste0("distribution_sex_age/income_heterogeneity_sex_age_", level, ".zip")
+    filename <- paste0("distribution_sex_age/distribution_sex_age_", level, ".zip")
   } else if (category == "distribution_sex_nationality") {
-    filename <- paste0("distribution_sex_nationality/income_heterogeneity_sex_nationality_", level, ".zip")
+    filename <- paste0("distribution_sex_nationality/distribution_sex_nationality_", level, ".zip")
   } else {
     filename <- paste0(category, "/", category, "_", level, ".zip")
   }
