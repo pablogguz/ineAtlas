@@ -355,19 +355,19 @@ process_ine_data <- function(indicator_type) {
       mun_code = str_extract(Municipios, "^\\d+"),
       mun_name = str_trim(str_remove(Municipios, "^\\d+\\s")),
       district_code = str_extract(Distritos, "\\d+"),
-      section_code = str_extract(Secciones, "\\d+"),
+      tract_code = str_extract(Secciones, "\\d+"),
       year = Periodo,
       indicator = .data[[config$column]],
       value = Total
     ) %>%
-    select(mun_code, mun_name, district_code, section_code, year, any_of(group_cols), indicator, value)
+    select(mun_code, mun_name, district_code, tract_code, year, any_of(group_cols), indicator, value)
 
   # Convert to wide format
   # For distribution data, keep demographic columns in id_cols
   base_id_cols <- list(
     mun = c("mun_code", "mun_name", "year"),
     district = c("mun_code", "mun_name", "district_code", "year"),
-    section = c("mun_code", "mun_name", "district_code", "section_code", "year")
+    section = c("mun_code", "mun_name", "district_code", "tract_code", "year")
   )
 
   mun_data_wide <- mun_data %>%

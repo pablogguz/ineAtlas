@@ -18,9 +18,9 @@ create_mock_csv <- function(category, level) {
   # Add level-specific columns
   if (level == "district") {
     data$district_code <- c("01", "02")
-  } else if (level == "section") {
+  } else if (level == "tract") {
     data$district_code <- c("01", "02")
-    data$section_code <- c("001", "002")
+    data$tract_code <- c("001", "002")
   }
   
   # Add category-specific columns
@@ -76,7 +76,7 @@ test_that("get_atlas validates input parameters correctly", {
   
   expect_error(
     get_atlas("income", "invalid_level"),
-    "Level must be one of: municipality, district, section"
+    "Level must be one of: municipality, district, tract"
   )
 })
 
@@ -234,16 +234,16 @@ test_that("get_atlas handles different geographic levels correctly", {
   expect_true("district_code" %in% names(district_data))
   
   # Test section level
-  stub(get_atlas, 'httr::GET', function(...) create_mock_response("income", "section"))
+  stub(get_atlas, 'httr::GET', function(...) create_mock_response("income", "tract"))
   stub(get_atlas, 'readr::read_csv', function(...) data.frame(
     mun_code = "28001",
     mun_name = "Madrid",
     district_code = "01",
-    section_code = "001",
+    tract_code = "001",
     year = 2021,
     net_income_pc = 25000
   ))
   
-  section_data <- get_atlas("income", "section", cache = FALSE)
-  expect_true(all(c("district_code", "section_code") %in% names(section_data)))
+  section_data <- get_atlas("income", "tract", cache = FALSE)
+  expect_true(all(c("district_code", "tract_code") %in% names(section_data)))
 })

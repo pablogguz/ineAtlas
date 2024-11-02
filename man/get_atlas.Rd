@@ -12,7 +12,7 @@ get_atlas(category, level, cache = TRUE, cache_dir = tempdir())
 "distribution_sex_age", or "distribution_sex_nationality"}
 
 \item{level}{Character string specifying the geographic level. Must be one of:
-"municipality", "district", or "section"}
+"municipality", "district", or "tract"}
 
 \item{cache}{Logical indicating whether to cache the extracted data. Default is TRUE.
 Cached data is stored uncompressed for faster access.}

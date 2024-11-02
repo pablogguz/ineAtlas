@@ -7,7 +7,7 @@
 #'   "income", "income_sources", "demographics", "distribution_sex",
 #'   "distribution_sex_age", or "distribution_sex_nationality"
 #' @param level Character string specifying the geographic level. Must be one of:
-#'   "municipality", "district", or "section"
+#'   "municipality", "district", or "tract"
 #' @param cache Logical indicating whether to cache the extracted data. Default is TRUE.
 #'   Cached data is stored uncompressed for faster access.
 #' @param cache_dir Character string specifying the cache directory. Default is tempdir().
@@ -43,7 +43,7 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
     "distribution_sex_nationality"
   )
   
-  valid_levels <- c("municipality", "district", "section")
+  valid_levels <- c("municipality", "district", "tract")
   
   if (!category %in% valid_categories) {
     stop("Category must be one of: ", paste(valid_categories, collapse = ", "))
@@ -129,7 +129,7 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
     # Add helpful message for distribution data
     if (grepl("distribution_", category)) {
       cols <- names(data)
-      demographic_cols <- cols[!cols %in% c("mun_code", "mun_name", "district_code", "section_code", "year")]
+      demographic_cols <- cols[!cols %in% c("mun_code", "mun_name", "district_code", "tract_code", "year")]
       message("\nDemographic breakdown columns: ", paste(demographic_cols[1:min(5, length(demographic_cols))], collapse = ", "), 
               if(length(demographic_cols) > 5) "..." else "")
     }

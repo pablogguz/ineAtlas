@@ -1,2 +1,2 @@
 
-income_data <- get_atlas("income", "municipality")
+income_data <- get_atlas("income", "tract")
