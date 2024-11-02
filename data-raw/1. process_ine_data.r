@@ -183,11 +183,6 @@ process_ine_data <- function(indicator_type) {
     )
   )
 
-  # Update required_cols in config lists where needed
-  indicator_configs$distribution_sex$required_cols <- c("sex")
-  indicator_configs$distribution_sex_age$required_cols <- c("sex", "age_group")
-  indicator_configs$distribution_sex_nationality$required_cols <- c("sex", "nationality")
-
   config <- indicator_configs[[indicator_type]]
 
   # Function to check if file contains indicators
@@ -263,7 +258,21 @@ process_ine_data <- function(indicator_type) {
   # Determine additional grouping columns
   group_cols <- c()
   if (!is.null(config$required_cols)) {
-    group_cols <- config$required_cols
+    # Create mapping for column name translation
+    col_mapping <- c(
+      "Sexo" = "sex",
+      "Nacionalidad" = "nationality",
+      "Tramos de edad" = "age_group"
+    )
+
+    # Translate the required columns from Spanish to English
+    group_cols <- sapply(config$required_cols, function(col) {
+      if (col %in% names(col_mapping)) {
+        col_mapping[col]
+      } else {
+        col
+      }
+    })
   }
 
   # Translate demographic columns if they exist
@@ -276,7 +285,7 @@ process_ine_data <- function(indicator_type) {
           TRUE ~ tolower(Sexo)
         )
       ) %>%
-      select(-Sexo)  # Remove original column
+      select(-Sexo) # Remove original column
   }
 
   if ("Nacionalidad" %in% names(all_data)) {
@@ -288,7 +297,7 @@ process_ine_data <- function(indicator_type) {
           TRUE ~ tolower(Nacionalidad)
         )
       ) %>%
-      select(-Nacionalidad)  # Remove original column
+      select(-Nacionalidad) # Remove original column
   }
 
   if ("Tramos de edad" %in% names(all_data)) {
@@ -301,10 +310,30 @@ process_ine_data <- function(indicator_type) {
           TRUE ~ gsub(" ", "_", tolower(`Tramos de edad`))
         )
       ) %>%
-      select(-`Tramos de edad`)  # Remove original column
+      select(-`Tramos de edad`) # Remove original column
   }
 
+  # Print for debugging
+  cat("\nUpdated group_cols:", paste(group_cols, collapse = ", "), "\n")
+
   cat("Processing geographic levels...")
+
+  # Update required_cols in config lists where needed
+  indicator_configs$distribution_sex$required_cols <- c("sex")
+  indicator_configs$distribution_sex_age$required_cols <- c("sex", "age_group")
+  indicator_configs$distribution_sex_nationality$required_cols <- c("sex", "nationality")
+
+  # Update required_cols to match the new English column names
+  if ("Sexo" %in% names(all_data)) {
+    config$required_cols <- gsub("Sexo", "sex", config$required_cols)
+  }
+  if ("Nacionalidad" %in% names(all_data)) {
+    config$required_cols <- gsub("Nacionalidad", "nationality", config$required_cols)
+  }
+  if ("Tramos de edad" %in% names(all_data)) {
+    config$required_cols <- gsub("Tramos de edad", "age_group", config$required_cols)
+  }
+
   # Process each geographic level
   # Municipality level
   mun_data <- all_data %>%
@@ -312,8 +341,15 @@ process_ine_data <- function(indicator_type) {
 
   # Select columns based on whether it's a distribution file
   if (length(group_cols) > 0) {
+    # Use the updated English column names
     mun_data <- mun_data %>%
-      select(Municipios, all_of(group_cols), all_of(config$column), Periodo, Total)
+      select(
+        Municipios,
+        any_of(c("sex", "nationality", "age_group")),
+        all_of(config$column),
+        Periodo,
+        Total
+      )
   } else {
     mun_data <- mun_data %>%
       select(Municipios, all_of(config$column), Periodo, Total)
@@ -327,7 +363,11 @@ process_ine_data <- function(indicator_type) {
       indicator = .data[[config$column]],
       value = Total
     ) %>%
-    select(mun_code, mun_name, year, any_of(group_cols), indicator, value)
+    select(
+      mun_code, mun_name, year,
+      any_of(c("sex", "nationality", "age_group")),
+      indicator, value
+    )
 
   # District level
   district_data <- all_data %>%
@@ -335,7 +375,14 @@ process_ine_data <- function(indicator_type) {
 
   if (length(group_cols) > 0) {
     district_data <- district_data %>%
-      select(Municipios, Distritos, all_of(group_cols), all_of(config$column), Periodo, Total)
+      select(
+        Municipios,
+        Distritos,
+        any_of(c("sex", "nationality", "age_group")),
+        all_of(config$column),
+        Periodo,
+        Total
+      )
   } else {
     district_data <- district_data %>%
       select(Municipios, Distritos, all_of(config$column), Periodo, Total)
@@ -350,7 +397,11 @@ process_ine_data <- function(indicator_type) {
       indicator = .data[[config$column]],
       value = Total
     ) %>%
-    select(mun_code, mun_name, district_code, year, any_of(group_cols), indicator, value)
+    select(
+      mun_code, mun_name, district_code, year,
+      any_of(c("sex", "nationality", "age_group")),
+      indicator, value
+    )
 
   # Section level
   section_data <- all_data %>%
@@ -358,7 +409,15 @@ process_ine_data <- function(indicator_type) {
 
   if (length(group_cols) > 0) {
     section_data <- section_data %>%
-      select(Municipios, Distritos, Secciones, all_of(group_cols), all_of(config$column), Periodo, Total)
+      select(
+        Municipios,
+        Distritos,
+        Secciones,
+        any_of(c("sex", "nationality", "age_group")),
+        all_of(config$column),
+        Periodo,
+        Total
+      )
   } else {
     section_data <- section_data %>%
       select(Municipios, Distritos, Secciones, all_of(config$column), Periodo, Total)
@@ -374,7 +433,11 @@ process_ine_data <- function(indicator_type) {
       indicator = .data[[config$column]],
       value = Total
     ) %>%
-    select(mun_code, mun_name, district_code, tract_code, year, any_of(group_cols), indicator, value)
+    select(
+      mun_code, mun_name, district_code, tract_code, year,
+      any_of(c("sex", "nationality", "age_group")),
+      indicator, value
+    )
 
   # Convert to wide format
   # For distribution data, keep demographic columns in id_cols
@@ -384,10 +447,16 @@ process_ine_data <- function(indicator_type) {
     section = c("mun_code", "mun_name", "district_code", "tract_code", "year")
   )
 
+  # Add the demographic columns to the id_cols if they exist
+  demographic_cols <- intersect(
+    c("sex", "nationality", "age_group"),
+    names(mun_data)
+  )
+
   mun_data_wide <- mun_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
-      id_cols = c(base_id_cols$mun, any_of(group_cols)),
+      id_cols = c(base_id_cols$mun, all_of(demographic_cols)),
       names_from = indicator,
       values_from = value
     )
@@ -395,7 +464,7 @@ process_ine_data <- function(indicator_type) {
   district_data_wide <- district_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
-      id_cols = c(base_id_cols$district, any_of(group_cols)),
+      id_cols = c(base_id_cols$district, all_of(demographic_cols)),
       names_from = indicator,
       values_from = value
     )
@@ -403,7 +472,7 @@ process_ine_data <- function(indicator_type) {
   section_data_wide <- section_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
-      id_cols = c(base_id_cols$section, any_of(group_cols)),
+      id_cols = c(base_id_cols$section, all_of(demographic_cols)),
       names_from = indicator,
       values_from = value
     )
