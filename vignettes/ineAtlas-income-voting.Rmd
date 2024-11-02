@@ -28,6 +28,7 @@ This vignette demonstrates how to combine data from the Spanish Statistical Offi
 ## Required packages
 
 ```{r packages}
+library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(ineAtlas)
