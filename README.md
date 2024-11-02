@@ -28,6 +28,9 @@ The data is organized into several categories and is available at three geograph
 | Distribution by sex, age & nationality | Income distribution indicators by sex and nationality status |
 | Inequality indicators | Inequality metrics including Gini coefficient and P80/P20 ratio |
 
+All the data is stored in the accompanying [`ineAtlas.data`] repository. You can find the data dictionary and more information about the data structure [here](https://pablogguz.github.io/ineAtlas.data/).
+
+
 ## Installation
 
 You can install the development version of ineAtlas from [GitHub](https://github.com/) with:
