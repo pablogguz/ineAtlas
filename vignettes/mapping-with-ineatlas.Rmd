@@ -1,6 +1,8 @@
 ---
 title: "Creating maps with ineAtlas"
 output: rmarkdown::html_vignette
+author: "Pablo Garcia Guzman"
+date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{Creating maps with ineAtlas}
   %\VignetteEngine{knitr::rmarkdown}
@@ -29,6 +31,7 @@ library(ineAtlas)
 library(mapSpain)
 library(dplyr)
 library(ggplot2)
+library(ggtext)
 ```
 
 ## Get municipality data
@@ -77,7 +80,11 @@ ggplot(mun_map) +
             labels = c("<8k", "8-10k", "10-12k", "12-14k", "14-16k", ">16k")
         )),
         color = NA
-    ) + # remove borders by setting color = NA
+    ) +
+    labs(
+        title = "Income per capita across Spanish municipalities, 2022",
+        caption = "@pablogguz_ | The map shows net income per capita at the municipality level. Source: Spanish Statistical Office and author's calculations."
+    ) +
     scale_fill_manual(
         name = "Net income per \ncapita, 2022 (€)",
         values = c("#67001F", "#B2182B", "#D6604D", "#4393C3", "#2166AC", "#053061"),
@@ -86,7 +93,16 @@ ggplot(mun_map) +
     theme_void() +
     theme(
         text = element_text(family = "Open Sans", size = 16),
-        legend.position = c(0.2, 0.5)
+        plot.title = element_text(size = 18, margin = margin(b = 20)),
+        legend.position = c(0.2, 0.5),
+        plot.caption = element_textbox_simple(
+            size = 12,
+            color = "grey40",
+            margin = margin(t = 20),
+            hjust = 0,
+            halign = 0,
+            lineheight = 1.2
+        )
     )
 ```
 

@@ -11,6 +11,7 @@ library(mapSpain)
 library(tidyverse)
 library(scales)
 library(extrafont)
+library(ggtext)
 
 # Get municipality level income data
 mun_data <- get_atlas(
