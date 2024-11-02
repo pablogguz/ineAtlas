@@ -19,7 +19,7 @@ The data is organized into several categories and is available at three geograph
 ### Available datasets
 | Dataset | Description |
 |---------|------------|
-| Income | Income indicators including net/gross income per capita and household |
+| Income | Income indicators including net/gross (equivalised) income per capita |
 | Income sources | Income indicators by source (wages, pensions, benefits, etc.) |
 | Demographics | Population characteristics including age structure and household composition |
 | Distribution by sex | Income distribution indicators disaggregated by sex |
