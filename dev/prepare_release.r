@@ -20,6 +20,9 @@ devtools::test()
 # Checks ----
 devtools::check()
 
+# Vignettes 
+devtools::build_vignettes()
+
 # Build website
 pkgdown::build_site()
 

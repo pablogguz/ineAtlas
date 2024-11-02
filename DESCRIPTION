@@ -22,7 +22,11 @@ Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
-    lifecycle (>= 1.0.0)
+    lifecycle (>= 1.0.0),
+    mapSpain,
+    ggplot2,
+    scales
 Config/testthat/edition: 3
 URL: https://github.com/pablogguz/ineAtlas, https://pablogguz.github.io/ineAtlas/
 BugReports: https://github.com/pablogguz/ineAtlas/issues
+VignetteBuilder: knitr
