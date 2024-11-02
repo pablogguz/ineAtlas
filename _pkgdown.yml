@@ -1,4 +1,7 @@
 url: https://pablogguz.github.io/ineAtlas/
 template:
   bootstrap: 5
-
+  opengraph:
+    twitter:
+      creator: "@pablogguz_"
+      card: summary
