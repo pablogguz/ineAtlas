@@ -48,8 +48,8 @@ sticker_pkg <- sticker(
   s_y = 1.1,            # Subplot y position
   s_width = 1.7,        # Subplot width
   s_height = 1.7,       # Subplot height
-  h_fill = "#e74c3c",   # Hexagon fill (red)
-  h_color = "#c0392b",  # Hexagon border
+  h_fill = "#FF3B3B",    # Bright red
+  h_color = "#8B0000",   # Darker red border
   p_color = "white",    # Package name color
   p_y = 0.45,            # Package name y position
   url = "pablogguz.github.io/ineAtlas",
