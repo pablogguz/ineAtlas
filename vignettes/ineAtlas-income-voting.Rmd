@@ -33,6 +33,7 @@ library(ineAtlas)
 library(extrafont)
 library(data.table)
 library(ggtext)
+library(stringr)
 ```
 
 ## Getting the data
