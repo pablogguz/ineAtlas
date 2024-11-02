@@ -5,7 +5,7 @@ Authors@R:
     person("Pablo", "García Guzmán", , "garciagp@ebrd.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4642-7400"))
 Description: Provides tools to access data from the Spanish Statistical 
-    Office's Atlas de Distribución de Renta de los Hogares (Income Distribution Atlas). 
+    Office's Atlas de Distribución de Renta de los Hogares (Household Income Distribution Atlas). 
     The package offers functions to fetch standardized socioeconomic indicators at multiple 
     geographic levels (municipality, district, and census tract), including income metrics, 
     demographic characteristics, and inequality measures.
