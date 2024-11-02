@@ -441,4 +441,4 @@ process_ine_data <- function(indicator_type) {
 #process_ine_data("distribution_sex")
 
 process_ine_data("distribution_sex_age")
-# process_ine_data("distribution_sex_age_nationality")
+# process_ine_data("distribution_sex_nationality")
