@@ -261,6 +261,35 @@ process_ine_data <- function(indicator_type) {
     group_cols <- config$required_cols
   }
 
+  # Translate demographic columns if they exist
+  if ("Sexo" %in% names(all_data)) {
+    all_data <- all_data %>%
+      mutate(Sexo = case_when(
+        Sexo == "Mujeres" ~ "Females",
+        Sexo == "Hombres" ~ "Males",
+        TRUE ~ Sexo
+      ))
+  }
+
+  if ("Nacionalidad" %in% names(all_data)) {
+    all_data <- all_data %>%
+      mutate(Nacionalidad = case_when(
+        Nacionalidad == "Española" ~ "Spanish",
+        Nacionalidad == "Extranjera" ~ "Foreign",
+        TRUE ~ Nacionalidad
+      ))
+  }
+
+  if ("Tramos de edad" %in% names(all_data)) {
+    all_data <- all_data %>%
+      mutate(`Tramos de edad` = case_when(
+        `Tramos de edad` == "Menos de 18 años" ~ "Under 18",
+        `Tramos de edad` == "De 18 a 64 años" ~ "18-64",
+        `Tramos de edad` == "65 y más años" ~ "Over 65",
+        TRUE ~ `Tramos de edad`
+      ))
+  }
+
   cat("Processing geographic levels...")
   # Process each geographic level
   # Municipality level
