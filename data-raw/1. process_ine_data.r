@@ -183,6 +183,11 @@ process_ine_data <- function(indicator_type) {
     )
   )
 
+  # Update required_cols in config lists where needed
+  indicator_configs$distribution_sex$required_cols <- c("sex")
+  indicator_configs$distribution_sex_age$required_cols <- c("sex", "age_group")
+  indicator_configs$distribution_sex_nationality$required_cols <- c("sex", "nationality")
+
   config <- indicator_configs[[indicator_type]]
 
   # Function to check if file contains indicators
@@ -264,30 +269,39 @@ process_ine_data <- function(indicator_type) {
   # Translate demographic columns if they exist
   if ("Sexo" %in% names(all_data)) {
     all_data <- all_data %>%
-      mutate(Sexo = case_when(
-        Sexo == "Mujeres" ~ "Females",
-        Sexo == "Hombres" ~ "Males",
-        TRUE ~ Sexo
-      ))
+      mutate(
+        sex = case_when(
+          Sexo == "Mujeres" ~ "female",
+          Sexo == "Hombres" ~ "male",
+          TRUE ~ tolower(Sexo)
+        )
+      ) %>%
+      select(-Sexo)  # Remove original column
   }
 
   if ("Nacionalidad" %in% names(all_data)) {
     all_data <- all_data %>%
-      mutate(Nacionalidad = case_when(
-        Nacionalidad == "Española" ~ "Spanish",
-        Nacionalidad == "Extranjera" ~ "Foreign",
-        TRUE ~ Nacionalidad
-      ))
+      mutate(
+        nationality = case_when(
+          Nacionalidad == "Española" ~ "spanish",
+          Nacionalidad == "Extranjera" ~ "foreign",
+          TRUE ~ tolower(Nacionalidad)
+        )
+      ) %>%
+      select(-Nacionalidad)  # Remove original column
   }
 
   if ("Tramos de edad" %in% names(all_data)) {
     all_data <- all_data %>%
-      mutate(`Tramos de edad` = case_when(
-        `Tramos de edad` == "Menos de 18 años" ~ "Under 18",
-        `Tramos de edad` == "De 18 a 64 años" ~ "18-64",
-        `Tramos de edad` == "65 y más años" ~ "Over 65",
-        TRUE ~ `Tramos de edad`
-      ))
+      mutate(
+        age_group = case_when(
+          `Tramos de edad` == "Menos de 18 años" ~ "under_18",
+          `Tramos de edad` == "De 18 a 64 años" ~ "18_64",
+          `Tramos de edad` == "65 y más años" ~ "over_65",
+          TRUE ~ gsub(" ", "_", tolower(`Tramos de edad`))
+        )
+      ) %>%
+      select(-`Tramos de edad`)  # Remove original column
   }
 
   cat("Processing geographic levels...")
