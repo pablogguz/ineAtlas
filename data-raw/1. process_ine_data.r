@@ -423,8 +423,8 @@ process_ine_data <- function(indicator_type) {
     }
     
     mun_provinces <- check_provinces(mun_data_wide, "Municipality")
-    district_provinces <- check_provinces(district_data_wide, "District")
-    section_provinces <- check_provinces(section_data_wide, "Census tract")
+    # district_provinces <- check_provinces(district_data_wide, "District")
+    # section_provinces <- check_provinces(section_data_wide, "Census tract")
 
     # Return the processed datasets invisibly
     return(invisible(list(
