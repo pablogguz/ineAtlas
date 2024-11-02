@@ -46,8 +46,8 @@ sticker_pkg <- sticker(
   p_size = 17,           # Package name size
   s_x = 1,               # Subplot x position
   s_y = 1.1,            # Subplot y position
-  s_width = 1.7,        # Subplot width
-  s_height = 1.7,       # Subplot height
+  s_width = 1.5,        # Subplot width
+  s_height = 1.5,       # Subplot height
   h_fill = "#FF3B3B",    # Bright red
   h_color = "#8B0000",   # Darker red border
   p_color = "white",    # Package name color
