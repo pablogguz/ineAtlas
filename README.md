@@ -6,7 +6,7 @@
 [![R-CMD-check](https://github.com/pablogguz/ineAtlas/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pablogguz/ineAtlas/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of `ineAtlas` package is to provide easy access to granular socioeconomic indicators from the Spanish Statistical Office (INE) _Atlas de Distribución de Renta de los Hogares_ (Household Income Distribution Atlas). This dataset combines administrative tax data with population statistics to provide detailed information about income distribution and related socioeconomic indicators across Spanish territories.
+The goal of `ineAtlas` package is to provide easy access to granular socioeconomic indicators from the Spanish Statistical Office (INE) _Atlas de Distribución de Renta de los Hogares_ (Household Income Distribution Atlas). This dataset combines administrative tax data with population statistics to provide detailed information about income distribution and related socioeconomic indicators across Spain.
 
 ## Data structure
 
@@ -39,13 +39,13 @@ pak::pak("pablogguz/ineAtlas")
 
 ## Example
 
-Here's a basic example of fetching and analyzing municipal-level income data:
+Here's a basic example of fetching census tract-level income data:
 
 ``` r
 library(ineAtlas)
 
 # Get municipality level income data
-income_data <- get_atlas("income", "municipality")
+income_data <- get_atlas("income", "tract")
 
 # View the first few rows
 head(income_data)
