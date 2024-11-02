@@ -1,11 +1,11 @@
-#*------------------------------------------------------------------------------
+#* ------------------------------------------------------------------------------
 #* Process INE data files by indicator type
 #* Returns three datasets: municipality, district, and census tract level
-#*------------------------------------------------------------------------------
+#* ------------------------------------------------------------------------------
 
 library(tidyverse)
 
-# Set paths 
+# Set paths
 username <- Sys.getenv("USERNAME")
 
 root <- paste0("C:/Users/", username, "/Dropbox/ineAtlas_data/")
@@ -16,70 +16,72 @@ proc <- paste0(root, "/proc/")
 
 # INE province codes mapping
 province_codes <- c(
-    "02" = "Albacete",
-    "03" = "Alicante/Alacant",
-    "04" = "Almería",
-    "01" = "Araba/Álava",
-    "33" = "Asturias",
-    "05" = "Avila",
-    "06" = "Badajoz",
-    "07" = "Balears, Illes",
-    "08" = "Barcelona",
-    "48" = "Bizkaia",
-    "09" = "Burgos",
-    "10" = "Cáceres",
-    "11" = "Cádiz",
-    "39" = "Cantabria",
-    "12" = "Castellón/Castelló",
-    "13" = "Ciudad Real",
-    "14" = "Córdoba",
-    "15" = "Coruña, A",
-    "16" = "Cuenca",
-    "20" = "Gipuzkoa",
-    "17" = "Girona",
-    "18" = "Granada",
-    "19" = "Guadalajara",
-    "21" = "Huelva",
-    "22" = "Huesca",
-    "23" = "Jaén",
-    "24" = "León",
-    "25" = "Lleida",
-    "27" = "Lugo",
-    "28" = "Madrid",
-    "29" = "Málaga",
-    "30" = "Murcia",
-    "31" = "Navarra",
-    "32" = "Ourense",
-    "34" = "Palencia",
-    "35" = "Palmas, Las",
-    "36" = "Pontevedra",
-    "26" = "Rioja, La",
-    "37" = "Salamanca",
-    "38" = "Santa Cruz de Tenerife",
-    "40" = "Segovia",
-    "41" = "Sevilla",
-    "42" = "Soria",
-    "43" = "Tarragona",
-    "44" = "Teruel",
-    "45" = "Toledo",
-    "46" = "Valencia/València",
-    "47" = "Valladolid",
-    "49" = "Zamora",
-    "50" = "Zaragoza",
-    "51" = "Ceuta",
-    "52" = "Melilla"
+  "02" = "Albacete",
+  "03" = "Alicante/Alacant",
+  "04" = "Almería",
+  "01" = "Araba/Álava",
+  "33" = "Asturias",
+  "05" = "Avila",
+  "06" = "Badajoz",
+  "07" = "Balears, Illes",
+  "08" = "Barcelona",
+  "48" = "Bizkaia",
+  "09" = "Burgos",
+  "10" = "Cáceres",
+  "11" = "Cádiz",
+  "39" = "Cantabria",
+  "12" = "Castellón/Castelló",
+  "13" = "Ciudad Real",
+  "14" = "Córdoba",
+  "15" = "Coruña, A",
+  "16" = "Cuenca",
+  "20" = "Gipuzkoa",
+  "17" = "Girona",
+  "18" = "Granada",
+  "19" = "Guadalajara",
+  "21" = "Huelva",
+  "22" = "Huesca",
+  "23" = "Jaén",
+  "24" = "León",
+  "25" = "Lleida",
+  "27" = "Lugo",
+  "28" = "Madrid",
+  "29" = "Málaga",
+  "30" = "Murcia",
+  "31" = "Navarra",
+  "32" = "Ourense",
+  "34" = "Palencia",
+  "35" = "Palmas, Las",
+  "36" = "Pontevedra",
+  "26" = "Rioja, La",
+  "37" = "Salamanca",
+  "38" = "Santa Cruz de Tenerife",
+  "40" = "Segovia",
+  "41" = "Sevilla",
+  "42" = "Soria",
+  "43" = "Tarragona",
+  "44" = "Teruel",
+  "45" = "Toledo",
+  "46" = "Valencia/València",
+  "47" = "Valladolid",
+  "49" = "Zamora",
+  "50" = "Zaragoza",
+  "51" = "Ceuta",
+  "52" = "Melilla"
 )
 
 process_ine_data <- function(indicator_type) {
   # Validate indicator type
-  valid_types <- c("income", "income_sources", "demographics", 
-                   "distribution_sex", "distribution_sex_age", 
-                   "distribution_sex_nationality", "gini_p80p20")
-  
+  valid_types <- c(
+    "income", "income_sources", "demographics",
+    "distribution_sex", "distribution_sex_age",
+    "distribution_sex_nationality", "gini_p80p20"
+  )
+
   if (!indicator_type %in% valid_types) {
     stop("Invalid indicator type. Must be one of: ", paste(valid_types, collapse = ", "))
   }
-  
+
   # Define indicator column and mapping based on type
   indicator_configs <- list(
     income = list(
@@ -180,49 +182,49 @@ process_ine_data <- function(indicator_type) {
       )
     )
   )
-  
+
   config <- indicator_configs[[indicator_type]]
-  
+
   # Function to check if file contains indicators
   has_indicators <- function(file_path) {
-    header <- readLines(file_path, n=1)
+    header <- readLines(file_path, n = 1)
     cols <- strsplit(header, "\t")[[1]]
-    
+
     # Check main indicator column
     has_main_col <- config$column %in% cols
-    
+
     # If no additional requirements, return main column check
-    if(is.null(config$required_cols) && is.null(config$excluded_cols)) {
+    if (is.null(config$required_cols) && is.null(config$excluded_cols)) {
       return(has_main_col)
     }
-    
+
     # Check required columns
     has_required <- all(config$required_cols %in% cols)
-    
+
     # Check excluded columns
     no_excluded <- !any(config$excluded_cols %in% cols)
-    
+
     return(has_main_col && has_required && no_excluded)
   }
-  
+
   # Find relevant files
   files <- list.files(raw, pattern = "\\.csv$", full.names = TRUE)
   cat("Found", length(files), "total files\n")
-  
+
   # Filter files
   indicator_files <- character(0)
   cat(sprintf("\nChecking files for %s indicators:\n", indicator_type))
-  for(file in files) {
-    if(has_indicators(file)) {
+  for (file in files) {
+    if (has_indicators(file)) {
       cat("\nFound indicators in:", basename(file))
       indicator_files <- c(indicator_files, file)
     }
   }
-  
+
   cat("\n\nFound", length(indicator_files), indicator_type, "files\n")
-  
-  if(grepl("distribution_", indicator_type)) {
-    if(length(indicator_files) != 104) {
+
+  if (grepl("distribution_", indicator_type)) {
+    if (length(indicator_files) != 104) {
       cat(sprintf("\nWARNING: Found %d files but expected 104 (2 per province)\n", length(indicator_files)))
     }
   }
@@ -231,7 +233,7 @@ process_ine_data <- function(indicator_type) {
   cat("\nReading files...\n")
 
   data_list <- list()
-  for(file in indicator_files) {
+  for (file in indicator_files) {
     df <- read_delim(
       file,
       delim = "\t",
@@ -240,11 +242,11 @@ process_ine_data <- function(indicator_type) {
     )
     data_list[[length(data_list) + 1]] <- df
   }
-  
+
   # Combine files
   cat("\nBinding rows...\n")
   all_data <- bind_rows(data_list)
-  
+
   # Convert Total to numeric
   all_data <- all_data %>%
     mutate(
@@ -252,28 +254,28 @@ process_ine_data <- function(indicator_type) {
       Total = str_replace(Total, ",", "."),
       Total = as.numeric(Total)
     )
-  
+
   # Determine additional grouping columns
   group_cols <- c()
-  if(!is.null(config$required_cols)) {
+  if (!is.null(config$required_cols)) {
     group_cols <- config$required_cols
   }
-  
+
   cat("Processing geographic levels...")
   # Process each geographic level
   # Municipality level
   mun_data <- all_data %>%
     filter(is.na(Distritos) | Distritos == "")
-  
+
   # Select columns based on whether it's a distribution file
-  if(length(group_cols) > 0) {
+  if (length(group_cols) > 0) {
     mun_data <- mun_data %>%
       select(Municipios, all_of(group_cols), all_of(config$column), Periodo, Total)
   } else {
     mun_data <- mun_data %>%
       select(Municipios, all_of(config$column), Periodo, Total)
   }
-  
+
   mun_data <- mun_data %>%
     mutate(
       mun_code = str_extract(Municipios, "^\\d+"),
@@ -283,19 +285,19 @@ process_ine_data <- function(indicator_type) {
       value = Total
     ) %>%
     select(mun_code, mun_name, year, any_of(group_cols), indicator, value)
-  
+
   # District level
   district_data <- all_data %>%
     filter((!is.na(Distritos) & Distritos != "") & (is.na(Secciones) | Secciones == ""))
-  
-  if(length(group_cols) > 0) {
+
+  if (length(group_cols) > 0) {
     district_data <- district_data %>%
       select(Municipios, Distritos, all_of(group_cols), all_of(config$column), Periodo, Total)
   } else {
     district_data <- district_data %>%
       select(Municipios, Distritos, all_of(config$column), Periodo, Total)
   }
-  
+
   district_data <- district_data %>%
     mutate(
       mun_code = str_extract(Municipios, "^\\d+"),
@@ -306,19 +308,19 @@ process_ine_data <- function(indicator_type) {
       value = Total
     ) %>%
     select(mun_code, mun_name, district_code, year, any_of(group_cols), indicator, value)
-  
+
   # Section level
   section_data <- all_data %>%
     filter(!is.na(Secciones) & Secciones != "")
-  
-  if(length(group_cols) > 0) {
+
+  if (length(group_cols) > 0) {
     section_data <- section_data %>%
       select(Municipios, Distritos, Secciones, all_of(group_cols), all_of(config$column), Periodo, Total)
   } else {
     section_data <- section_data %>%
       select(Municipios, Distritos, Secciones, all_of(config$column), Periodo, Total)
   }
-  
+
   section_data <- section_data %>%
     mutate(
       mun_code = str_extract(Municipios, "^\\d+"),
@@ -330,7 +332,7 @@ process_ine_data <- function(indicator_type) {
       value = Total
     ) %>%
     select(mun_code, mun_name, district_code, section_code, year, any_of(group_cols), indicator, value)
-  
+
   # Convert to wide format
   # For distribution data, keep demographic columns in id_cols
   base_id_cols <- list(
@@ -338,7 +340,7 @@ process_ine_data <- function(indicator_type) {
     district = c("mun_code", "mun_name", "district_code", "year"),
     section = c("mun_code", "mun_name", "district_code", "section_code", "year")
   )
-  
+
   mun_data_wide <- mun_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
@@ -346,7 +348,7 @@ process_ine_data <- function(indicator_type) {
       names_from = indicator,
       values_from = value
     )
-  
+
   district_data_wide <- district_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
@@ -354,91 +356,127 @@ process_ine_data <- function(indicator_type) {
       names_from = indicator,
       values_from = value
     )
-  
+
   section_data_wide <- section_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
-        id_cols = c(base_id_cols$section, any_of(group_cols)),
-        names_from = indicator,
-        values_from = value
-        )
-    
-    # Save datasets
-    out_dir <- file.path(gitdata, indicator_type)
-    dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-    
-    write_csv(mun_data_wide, file.path(out_dir, paste0(indicator_type, "_municipality.csv")))
-    write_csv(district_data_wide, file.path(out_dir, paste0(indicator_type, "_district.csv")))
-    write_csv(section_data_wide, file.path(out_dir, paste0(indicator_type, "_tract.csv")))
-    
-    # Check province coverage
-    cat("\nChecking province coverage:")
-    
-    check_provinces <- function(data, level) {
-      # Get all indicator columns from the mapping
-      indicator_columns <- unname(config$mapping)
-      
-      # Check provinces
-      provinces <- data %>%
-        mutate(province_code = substr(mun_code, 1, 2)) %>%
-        pull(province_code) %>%
-        unique() %>%
-        sort()
-      
-      cat(sprintf("\n%s data covers %d provinces (should be 52)", 
-                  level, length(provinces)))
-      
-      if(length(provinces) != 52) {
-          missing_codes <- setdiff(names(province_codes), provinces)
-          cat("\nMissing provinces:")
-          for(code in missing_codes) {
-              cat(sprintf("\n  - %s (%s)", province_codes[code], code))
-          }
-      }
-      
-      # For heterogeneity files, check data coverage by province
-      if(grepl("distribution_", indicator_type)) {
-          cat("\n\nChecking indicator coverage by province:")
-          
-          for(prov in provinces) {
-              prov_data <- data %>%
-                  filter(substr(mun_code, 1, 2) == prov)
-              
-              # Check which indicators have all NA values for this province
-              missing_indicators <- indicator_columns[sapply(indicator_columns, function(col) {
-                  all(is.na(prov_data[[col]]))
-              })]
-              
-              if(length(missing_indicators) > 0) {
-                  cat(sprintf("\n\nProvince %s (%s) missing data for:", 
-                      province_codes[prov], prov))
-                  for(ind in missing_indicators) {
-                      cat(sprintf("\n  - %s", ind))
-                  }
-              }
-          }
-      }
-      
-      return(provinces)
-    }
-    
-    mun_provinces <- check_provinces(mun_data_wide, "Municipality")
-    # district_provinces <- check_provinces(district_data_wide, "District")
-    # section_provinces <- check_provinces(section_data_wide, "Census tract")
+      id_cols = c(base_id_cols$section, any_of(group_cols)),
+      names_from = indicator,
+      values_from = value
+    )
 
-    # Return the processed datasets invisibly
-    return(invisible(list(
-        municipality = mun_data_wide,
-        district = district_data_wide,
-        tract = section_data_wide
-    )))
+  # Save datasets with compression
+  out_dir <- file.path(gitdata, indicator_type)
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
+  # Function to save and compress data
+  save_compressed <- function(data, filename) {
+    # Create a temporary file for the CSV
+    temp_csv <- tempfile(fileext = ".csv")
+    write_csv(data, temp_csv)
+
+    # Create zip file
+    zip_filename <- paste0(tools::file_path_sans_ext(filename), ".zip")
+    zip_path <- file.path(out_dir, zip_filename)
+
+    # Remove existing zip if it exists
+    if (file.exists(zip_path)) {
+      unlink(zip_path)
+    }
+
+    # Compress the CSV file
+    utils::zip(zip_path, temp_csv, flags = "-j9X") # -j: junk paths, -9: maximum compression, -X: no extras
+
+    # Clean up temporary file
+    unlink(temp_csv)
+
+    # Log compression results
+    orig_size <- file.size(temp_csv)
+    zip_size <- file.size(zip_path)
+    compression_ratio <- (1 - zip_size / orig_size) * 100
+    cat(sprintf(
+      "\nCompressed %s: %.1f MB -> %.1f MB (%.1f%% reduction)",
+      filename, orig_size / 1e6, zip_size / 1e6, compression_ratio
+    ))
+  }
+
+  # Save and compress each dataset
+  save_compressed(mun_data_wide, paste0(indicator_type, "_municipality.csv"))
+  save_compressed(district_data_wide, paste0(indicator_type, "_district.csv"))
+  save_compressed(section_data_wide, paste0(indicator_type, "_tract.csv"))
+
+  # Check province coverage
+  cat("\nChecking province coverage:")
+
+  check_provinces <- function(data, level) {
+    # Get all indicator columns from the mapping
+    indicator_columns <- unname(config$mapping)
+
+    # Check provinces
+    provinces <- data %>%
+      mutate(province_code = substr(mun_code, 1, 2)) %>%
+      pull(province_code) %>%
+      unique() %>%
+      sort()
+
+    cat(sprintf(
+      "\n%s data covers %d provinces (should be 52)",
+      level, length(provinces)
+    ))
+
+    if (length(provinces) != 52) {
+      missing_codes <- setdiff(names(province_codes), provinces)
+      cat("\nMissing provinces:")
+      for (code in missing_codes) {
+        cat(sprintf("\n  - %s (%s)", province_codes[code], code))
+      }
+    }
+
+    # For heterogeneity files, check data coverage by province
+    if (grepl("distribution_", indicator_type)) {
+      cat("\n\nChecking indicator coverage by province:")
+
+      for (prov in provinces) {
+        prov_data <- data %>%
+          filter(substr(mun_code, 1, 2) == prov)
+
+        # Check which indicators have all NA values for this province
+        missing_indicators <- indicator_columns[sapply(indicator_columns, function(col) {
+          all(is.na(prov_data[[col]]))
+        })]
+
+        if (length(missing_indicators) > 0) {
+          cat(sprintf(
+            "\n\nProvince %s (%s) missing data for:",
+            province_codes[prov], prov
+          ))
+          for (ind in missing_indicators) {
+            cat(sprintf("\n  - %s", ind))
+          }
+        }
+      }
+    }
+
+    return(provinces)
+  }
+
+  mun_provinces <- check_provinces(mun_data_wide, "Municipality")
+  # district_provinces <- check_provinces(district_data_wide, "District")
+  # section_provinces <- check_provinces(section_data_wide, "Census tract")
+
+  # Return the processed datasets invisibly
+  return(invisible(list(
+    municipality = mun_data_wide,
+    district = district_data_wide,
+    tract = section_data_wide
+  )))
 }
 
 # Run function ----
-#process_ine_data("income")
-#process_ine_data("income_sources")
-#process_ine_data("demographics")
-#process_ine_data("distribution_sex")
+# process_ine_data("income")
+# process_ine_data("income_sources")
+# process_ine_data("demographics")
+# process_ine_data("distribution_sex")
 
 process_ine_data("distribution_sex_age")
 # process_ine_data("distribution_sex_nationality")
