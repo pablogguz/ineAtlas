@@ -133,14 +133,6 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
     
     message("Data successfully loaded: ", nrow(data), " rows, ", ncol(data), " columns")
     
-    # Add helpful message for distribution data
-    if (grepl("distribution_", category)) {
-      cols <- names(data)
-      demographic_cols <- cols[!cols %in% c("mun_code", "mun_name", "district_code", "tract_code", "year")]
-      message("\nDemographic breakdown columns: ", paste(demographic_cols[1:min(5, length(demographic_cols))], collapse = ", "), 
-              if(length(demographic_cols) > 5) "..." else "")
-    }
-    
     return(data)
     
   }, error = function(e) {
