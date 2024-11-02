@@ -46,7 +46,7 @@ Here's a basic example of fetching census tract-level income data:
 ``` r
 library(ineAtlas)
 
-# Get municipality level income data
+# Get municipality-level income data
 income_data <- get_atlas("income", "tract")
 
 # View the first few rows
