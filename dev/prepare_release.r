@@ -2,7 +2,7 @@
 # # Add lifecycle badge to README
 # usethis::use_lifecycle_badge("experimental")
 
-# # Add R CMD check GitHub Actions workflow 
+# # Add R CMD check GitHub Actions workflow
 # usethis::use_github_action_check_standard()
 
 # # Add license
@@ -20,7 +20,7 @@ devtools::test()
 # Checks ----
 devtools::check()
 
-# Vignettes 
+# Vignettes
 devtools::build_vignettes()
 
 # Build website
