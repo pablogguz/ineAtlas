@@ -9,7 +9,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/pablogguz/ineatlas/badge/main)](https://www.codefactor.io/repository/github/pablogguz/ineatlas/overview/main)
 <!-- badges: end -->
 
-The goal of `ineAtlas` package is to provide easy access to granular socioeconomic indicators from the Spanish Statistical Office (INE) _Atlas de Distribución de Renta de los Hogares_ (Household Income Distribution Atlas). This dataset combines administrative tax data with population statistics to provide detailed information about the income distribution and related socioeconomic indicators at the municipal, district, and census tract levels.
+The goal of `ineAtlas` is to provide easy access to granular socioeconomic indicators from the Spanish Statistical Office (INE) _Atlas de Distribución de Renta de los Hogares_ (Household Income Distribution Atlas). This dataset combines administrative tax data with population statistics to provide detailed information about the income distribution and related socioeconomic indicators at the municipal, district, and census tract levels.
 
 ## Data structure
 
