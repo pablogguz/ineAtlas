@@ -25,6 +25,7 @@
 #' @export
 #' 
 #' @examples
+#' \donttest{
 #' # Get municipality level income data
 #' income_data <- get_atlas("income", "municipality")
 #' 
@@ -36,6 +37,7 @@
 #' 
 #' # Get income distribution indicators by sex and age
 #' age_dist <- get_atlas("distribution_sex_age", "district")
+#' }
 #' 
 #' @note Data files are stored compressed on the repository to reduce size and
 #'   download times. The function handles decompression automatically.
