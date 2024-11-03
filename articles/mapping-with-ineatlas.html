@@ -118,17 +118,17 @@ the municipality geometries.</p>
 <span></span>
 <span><span class="co"># Preview the data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mun_data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 9</span></span></span>
-<span><span class="co">#&gt;   mun_code mun_name   year net_income_pc net_income_hh net_income_equiv</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 02001    Abengibre  <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">13</span>063         <span style="text-decoration: underline;">32</span>657            <span style="text-decoration: underline;">19</span>598</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 02002    Alatoz     <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">11</span>346         <span style="text-decoration: underline;">24</span>306            <span style="text-decoration: underline;">15</span>925</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 02003    Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">13</span>836         <span style="text-decoration: underline;">35</span>722            <span style="text-decoration: underline;">20</span>762</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 02004    Albatana   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">10</span>767         <span style="text-decoration: underline;">23</span>630            <span style="text-decoration: underline;">15</span>507</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 02005    Alborea    <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">10</span>489         <span style="text-decoration: underline;">22</span>177            <span style="text-decoration: underline;">14</span>493</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 02006    Alcadozo   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">10</span>709         <span style="text-decoration: underline;">23</span>819            <span style="text-decoration: underline;">15</span>114</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: median_income_equiv &lt;dbl&gt;, gross_income_pc &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gross_income_hh &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 11</span></span></span>
+<span><span class="co">#&gt;   mun_code mun_name  prov_code prov_name  year net_income_pc net_income_hh</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 02001    Abengibre 02        Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">13</span>063         <span style="text-decoration: underline;">32</span>657</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 02002    Alatoz    02        Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">11</span>346         <span style="text-decoration: underline;">24</span>306</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 02003    Albacete  02        Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">13</span>836         <span style="text-decoration: underline;">35</span>722</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 02004    Albatana  02        Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">10</span>767         <span style="text-decoration: underline;">23</span>630</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 02005    Alborea   02        Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">10</span>489         <span style="text-decoration: underline;">22</span>177</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 02006    Alcadozo  02        Albacete   <span style="text-decoration: underline;">2</span>022         <span style="text-decoration: underline;">10</span>709         <span style="text-decoration: underline;">23</span>819</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: net_income_equiv &lt;dbl&gt;, median_income_equiv &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gross_income_pc &lt;dbl&gt;, gross_income_hh &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="get-municipality-geometries">Get municipality geometries<a class="anchor" aria-label="anchor" href="#get-municipality-geometries"></a>
@@ -146,7 +146,7 @@ the municipality geometries.</p>
 <span><span class="co"># Preview the joined data</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">mun_map</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 8,213</span></span>
-<span><span class="co">#&gt; Columns: 16</span></span>
+<span><span class="co">#&gt; Columns: 18</span></span>
 <span><span class="co">#&gt; $ codauto             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01", "01", "01", "01", "01", "01", "01", "01", "0…</span></span>
 <span><span class="co">#&gt; $ ine.ccaa.name       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Andalucía", "Andalucía", "Andalucía", "Andalucía"…</span></span>
 <span><span class="co">#&gt; $ cpro                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "04", "04", "04", "04", "04", "04", "04", "04", "0…</span></span>
@@ -155,6 +155,8 @@ the municipality geometries.</p>
 <span><span class="co">#&gt; $ name                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abla", "Abrucena", "Adra", "Albanchez", "Albolodu…</span></span>
 <span><span class="co">#&gt; $ LAU_CODE            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "04001", "04002", "04003", "04004", "04005", "0400…</span></span>
 <span><span class="co">#&gt; $ mun_name            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abla", "Abrucena", "Adra", "Albanchez", "Albolodu…</span></span>
+<span><span class="co">#&gt; $ prov_code           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "04", "04", "04", "04", "04", "04", "04", "04", "0…</span></span>
+<span><span class="co">#&gt; $ prov_name           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Almería", "Almería", "Almería", "Almería", "Almer…</span></span>
 <span><span class="co">#&gt; $ year                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 20…</span></span>
 <span><span class="co">#&gt; $ net_income_pc       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 11635, 10927, 9316, 10464, 11054, 9761, 10103, 120…</span></span>
 <span><span class="co">#&gt; $ net_income_hh       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 25522, 22066, 25639, 21030, 23237, 26991, 19494, 2…</span></span>
