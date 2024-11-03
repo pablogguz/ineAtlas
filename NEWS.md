@@ -1,3 +1,7 @@
+# ineAtlas 0.1.1
+
+* Prepared package for CRAN submission
+  
 # ineAtlas 0.1.0
 
 * Added `get_tract_geom()` function to fetch census tract geometries
