@@ -42,7 +42,7 @@ ggplot(mun_map) +
             labels = c("<8k", "8-10k", "10-12k", "12-14k", "14-16k", ">16k")
         )),
         color = NA
-    ) + # remove borders by setting color = NA
+    ) + 
     scale_fill_manual(
         name = "Net income per \ncapita, 2022 (€)",
         values = c("#67001F", "#B2182B", "#D6604D", "#4393C3", "#2166AC", "#053061"),

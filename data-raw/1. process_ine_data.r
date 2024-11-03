@@ -439,12 +439,33 @@ process_ine_data <- function(indicator_type) {
       indicator, value
     )
 
-  # Convert to wide format
+  # Add province names and province codes
+  # For municipality data
+  mun_data <- mun_data %>%
+      mutate(
+          prov_code = substr(mun_code, 1, 2),
+          prov_name = province_codes[prov_code]
+      )
+
+  # For district data
+  district_data <- district_data %>%
+      mutate(
+          prov_code = substr(mun_code, 1, 2),
+          prov_name = province_codes[prov_code]
+      )
+
+  # For section data
+  section_data <- section_data %>%
+      mutate(
+          prov_code = substr(mun_code, 1, 2),
+          prov_name = province_codes[prov_code]
+      )
+
   # For distribution data, keep demographic columns in id_cols
   base_id_cols <- list(
-    mun = c("mun_code", "mun_name", "year"),
-    district = c("mun_code", "mun_name", "district_code", "year"),
-    section = c("mun_code", "mun_name", "district_code", "tract_code", "year")
+    mun = c("mun_code", "mun_name", "prov_code", "prov_name", "year"),
+    district = c("mun_code", "mun_name", "prov_code", "prov_name", "district_code", "year"),
+    section = c("mun_code", "mun_name", "prov_code", "prov_name", "district_code", "tract_code", "year")
   )
 
   # Add the demographic columns to the id_cols if they exist
@@ -453,6 +474,7 @@ process_ine_data <- function(indicator_type) {
     names(mun_data)
   )
 
+  # Convert to wide format
   mun_data_wide <- mun_data %>%
     mutate(indicator = recode(indicator, !!!config$mapping)) %>%
     pivot_wider(
