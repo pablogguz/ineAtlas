@@ -13,6 +13,7 @@ devtools::load_all()
 
 # Documentation ----
 devtools::document()
+#devtools::build_manual()
 
 # Tests ----
 devtools::test()
