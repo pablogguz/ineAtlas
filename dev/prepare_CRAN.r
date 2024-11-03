@@ -28,10 +28,10 @@ urlchecker::url_update()
 
 # check on other distributions
 # _rhub v2
-rhub::rhub_setup() # Commit, push, merge
-rhub::rhub_doctor()
-rhub::rhub_platforms()
-rhub::rhub_check() # launch manually
+# rhub::rhub_setup() # Commit, push, merge
+# rhub::rhub_doctor()
+# rhub::rhub_platforms()
+# rhub::rhub_check() # launch manually
 
 # _win devel CRAN
 devtools::check_win_devel()

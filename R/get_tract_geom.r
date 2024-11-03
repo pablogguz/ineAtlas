@@ -24,12 +24,13 @@
 #' @export
 #' 
 #' @examples
+#' \donttest{
 #' # Get census tract boundaries for 2020
 #' tracts_2020 <- get_tract_geom(2020)
 #' 
 #' # Get boundaries without caching
 #' tracts_2019 <- get_tract_geom(2019, cache = FALSE)
-#' 
+#' }
 get_tract_geom <- function(year, cache = TRUE, cache_dir = tempdir()) {
   # Validate year
   valid_years <- 2015:2022
