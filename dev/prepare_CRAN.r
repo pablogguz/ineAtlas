@@ -33,7 +33,6 @@ rhub::rhub_doctor()
 rhub::rhub_platforms()
 rhub::rhub_check() # launch manually
 
-
 # _win devel CRAN
 devtools::check_win_devel()
 # _win release CRAN
