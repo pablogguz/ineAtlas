@@ -2,13 +2,15 @@ Package: ineAtlas
 Title: Access to Spanish Income Distribution Atlas Data
 Version: 0.1.0
 Authors@R: 
-    person("Pablo", "García Guzmán", , "garciagp@ebrd.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-4642-7400"))
-Description: Provides tools to access data from the Spanish Statistical 
-    Office's Atlas de Distribución de Renta de los Hogares (Household Income Distribution Atlas). 
-    The package offers functions to fetch standardized socioeconomic indicators at multiple 
-    geographic levels (municipality, district, and census tract), including income metrics, 
-    demographic characteristics, and inequality measures.
+    person("Pablo", "García Guzmán", , "garciagp@ebrd.com", role = c("aut", "cre"))
+Description: Provides access to granular socioeconomic indicators from the Spanish 
+    Statistical Office (INE) Household Income Distribution Atlas. The package downloads 
+    and processes data from a companion GitHub repository (https://github.com/pablogguz/ineAtlas.data) 
+    which contains processed versions of the official INE Atlas data. Functions are 
+    provided to featch data at multiple geographic levels (municipalities, districts, 
+    and census tracts), including income indicators, demographic characteristics,
+    and inequality metrics. The data repository is updated every year when new releases are 
+    published by INE.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
