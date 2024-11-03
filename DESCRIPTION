@@ -1,5 +1,5 @@
 Package: ineAtlas
-Title: Access to Spanish Income Distribution Atlas Data
+Title: Access to Spanish Household Income Distribution Atlas Data
 Version: 0.1.0
 Authors@R: 
     person("Pablo", "García Guzmán", , "garciagp@ebrd.com", role = c("aut", "cre"))
