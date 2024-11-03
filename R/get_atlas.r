@@ -1,6 +1,6 @@
 #' Fetch data from the ineAtlas data repository
 #' 
-#' Downloads and extracts compressed data files from the ineAtlas repository,
+#' Downloads and extracts compressed data files from the ineAtlas data repository,
 #' providing access to various socioeconomic indicators at different geographic levels.
 #' 
 #' @param category Character string specifying the data category. Must be one of:

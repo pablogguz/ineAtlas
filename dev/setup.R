@@ -38,3 +38,5 @@ setup_package <- function(pkg_name = "ebrdify") {
 setup_package(
   pkg_name = "ineAtlas"
 )
+
+# usethis::use_pkgdown_github_pages()

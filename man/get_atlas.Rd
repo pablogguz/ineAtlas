@@ -26,7 +26,7 @@ The data is automatically extracted from compressed files and cached
 locally if requested.
 }
 \description{
-Downloads and extracts compressed data files from the ineAtlas repository,
+Downloads and extracts compressed data files from the ineAtlas data repository,
 providing access to various socioeconomic indicators at different geographic levels.
 }
 \note{
