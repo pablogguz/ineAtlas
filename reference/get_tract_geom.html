@@ -83,7 +83,8 @@ Cached data is stored uncompressed for faster access.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get census tract boundaries for 2020</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Get census tract boundaries for 2020</span></span></span>
 <span class="r-in"><span><span class="va">tracts_2020</span> <span class="op">&lt;-</span> <span class="fu">get_tract_geom</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading geometries for 2020...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Caching geometries to ineatlas_tracts_2020.gpkg</span>
@@ -93,7 +94,7 @@ Cached data is stored uncompressed for faster access.</p></dd>
 <span class="r-in"><span><span class="va">tracts_2019</span> <span class="op">&lt;-</span> <span class="fu">get_tract_geom</span><span class="op">(</span><span class="fl">2019</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading geometries for 2019...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Geometries successfully loaded: 36317 features</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
