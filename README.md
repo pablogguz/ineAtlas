@@ -59,6 +59,12 @@ head(income_data)
 
 Contributions are welcome! Please feel free to submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
 
+## References
+
+**Spanish Statistical Office** (2024). *Household Income Distribution Atlas*. Retrieved from [https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm](https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm) [Accessed October 29, 2024]
+
+Latest data release: October 29, 2024
+
 ## Author
 
 **Pablo García Guzmán**  
