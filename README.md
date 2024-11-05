@@ -1,5 +1,5 @@
 
-# ineAtlas <img src="man/figures/logo.png" align="right" height="278" alt="" />
+# ineAtlas <img src="man/figures/logo.png" align="right" height="200" alt="" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -61,7 +61,7 @@ Contributions are welcome! Please feel free to submit a pull request. For major 
 
 ## References
 
-**Spanish Statistical Office** (2024). *Household Income Distribution Atlas*. Retrieved from [https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm](https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm) [Accessed October 29, 2024]
+**Spanish Statistical Office** (2024). *Household Income Distribution Atlas*. Retrieved from [https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm/](https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm/) [Accessed October 29, 2024]
 
 Latest data release: October 29, 2024
 
