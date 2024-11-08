@@ -41,6 +41,7 @@ library(stringr)
 ## Getting the data
 
 We'll combine two data sources:
+
 1. Income data at the census tract level
 2. Electoral results from Madrid's 2021 regional elections
 
