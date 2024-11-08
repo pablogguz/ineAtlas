@@ -35,7 +35,13 @@ All the data is stored in the accompanying [`ineAtlas.data`](https://github.com/
 
 ## Installation
 
-You can install the development version of ineAtlas from [GitHub](https://github.com/) with:
+You can install the released version of `ineAtlas` from CRAN with:
+
+``` r
+install.packages("ineAtlas")
+```
+
+Alternatively, you can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
