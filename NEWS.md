@@ -1,3 +1,7 @@
+# ineAtlas 0.1.2
+
+* Removed unnecessary `options()` settings in `get_atlas.r` and `get_tract_geom.r`
+
 # ineAtlas 0.1.1
 
 * Prepared package for CRAN submission

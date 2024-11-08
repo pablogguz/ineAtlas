@@ -51,4 +51,5 @@ usethis::use_cran_comments(open = rlang::is_interactive())
 usethis::use_version(which = c("patch", "minor", "major", "dev")[1])
 
 # Verify you're ready for release, and release
-devtools::release()
+#devtools::release()
+devtools::submit_cran()

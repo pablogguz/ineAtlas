@@ -96,9 +96,6 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
   # Try to download and process the data
   tryCatch({
     message("Downloading data from ", basename(filename), "...")
-    # Download with a timeout of 60 seconds
-    options(timeout = 60)
-    
     # Create temporary files for zip and csv
     temp_zip <- tempfile(fileext = ".zip")
     temp_dir <- tempfile()

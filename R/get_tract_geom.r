@@ -62,9 +62,6 @@ get_tract_geom <- function(year, cache = TRUE, cache_dir = tempdir()) {
   # Try to download and process the data
   tryCatch({
     message("Downloading geometries for ", year, "...")
-    # Download with a timeout of 60 seconds
-    options(timeout = 60)
-    
     # Create temporary files for zip and gpkg
     temp_zip <- tempfile(fileext = ".zip")
     temp_dir <- tempfile()

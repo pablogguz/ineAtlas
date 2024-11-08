@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides access to granular socioeconomic indicators from the Spanish Statistical Office (INE) Household Income Distribution Atlas. The package downloads and processes data from a companion GitHub repository (\url{https://github.com/pablogguz/ineAtlas.data/}) which contains processed versions of the official INE Atlas data. Functions are provided to fetch data at multiple geographic levels (municipalities, districts, and census tracts), including income indicators, demographic characteristics, and inequality metrics. The data repository is updated every year when new releases are published by INE.
+Provides access to granular socioeconomic indicators from the Spanish Statistical Office (INE) Household Income Distribution Atlas. The package downloads and processes data from a companion 'GitHub' repository (\url{https://github.com/pablogguz/ineAtlas.data/}) which contains processed versions of the official INE Atlas data. Functions are provided to fetch data at multiple geographic levels (municipalities, districts, and census tracts), including income indicators, demographic characteristics, and inequality metrics. The data repository is updated every year when new releases are published by INE.
 }
 \seealso{
 Useful links:
