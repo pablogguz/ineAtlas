@@ -4,8 +4,9 @@
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/ineAtlas)](https://CRAN.R-project.org/package=ineAtlas)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ineAtlas)](https://cran.r-project.org/package=ineAtlas)
 [![R-CMD-check](https://github.com/pablogguz/ineAtlas/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pablogguz/ineAtlas/actions/workflows/R-CMD-check.yaml)
-[![GitHub release](https://img.shields.io/github/v/release/pablogguz/ineAtlas)](https://github.com/pablogguz/ineAtlas/releases)
+    [![GitHub release](https://img.shields.io/github/v/release/pablogguz/ineAtlas)](https://github.com/pablogguz/ineAtlas/releases)
 [![CodeFactor](https://www.codefactor.io/repository/github/pablogguz/ineatlas/badge/main)](https://www.codefactor.io/repository/github/pablogguz/ineatlas/overview/main)
 <!-- badges: end -->
 

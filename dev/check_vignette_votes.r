@@ -51,7 +51,7 @@ plot_data <- elections_proc %>%
     )
 
 # Create plot
-ggplot() +
+final_plot <- ggplot() +
     geom_point(data = plot_data,
                aes(x = income_percentile * 100, 
                    y = vote_share * 100,
@@ -81,7 +81,7 @@ ggplot() +
     theme_minimal() +
     theme(
         text = element_text(family = "Open Sans", size = 20),
-        plot.title = element_text(size = 24, margin = margin(b = 20)),
+        plot.title = element_text(size = 20, margin = margin(b = 20)),
         plot.caption = element_textbox_simple(
             size = 12, 
             color = "grey40", 
@@ -93,5 +93,16 @@ ggplot() +
         panel.grid.minor = element_blank(),
         panel.grid.major.x = element_blank()
     )
+
+# Save with Twitter-optimized dimensions (1200 x 675 pixels)
+ggsave(
+    "twitter_votes.png",
+    final_plot,
+    width = 11,
+    height = 6.75,
+    dpi = 300,
+    bg = "white"
+)
+
 
 #usethis::use_vignette("ineAtlas-income-voting")

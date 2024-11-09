@@ -54,18 +54,18 @@ ggplot(mun_map) +
         legend.position = c(0.2, 0.5)
     )
 
-mun_data %>%
-  arrange(desc(net_income_pc)) %>%
-  select(mun_name, net_income_pc) %>%
-  head(10) %>%
-  mutate(
-    net_income_pc = round(net_income_pc, 2)
-  )
+# mun_data %>%
+#   arrange(desc(net_income_pc)) %>%
+#   select(mun_name, net_income_pc) %>%
+#   head(10) %>%
+#   mutate(
+#     net_income_pc = round(net_income_pc, 2)
+#   )
 
-mun_data %>%
-  arrange(net_income_pc) %>%
-  select(mun_name, net_income_pc) %>%
-  head(10) %>%
-  mutate(
-    net_income_pc = round(net_income_pc, 2)
-  )
+# mun_data %>%
+#   arrange(net_income_pc) %>%
+#   select(mun_name, net_income_pc) %>%
+#   head(10) %>%
+#   mutate(
+#     net_income_pc = round(net_income_pc, 2)
+#   )
