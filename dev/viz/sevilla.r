@@ -11,7 +11,7 @@ census_data <- get_atlas(
 
 geometries <- get_tract_geom(year = 2022)
 
-plot_data <- geometries %>% 
+plot_data <- geometries %>% =
     filter(municipality == "Sevilla") %>%
     left_join(census_data)
 
