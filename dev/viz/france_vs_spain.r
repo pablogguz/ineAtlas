@@ -13,6 +13,7 @@ library(mapproj)
 library(readxl)
 library(WDI)
 library(patchwork)
+library(Hmisc)
 
 # Set up environment
 username <- Sys.getenv("USERNAME")
@@ -218,7 +219,7 @@ tract <- tract %>%
 # Get tract geometries
 esp_map <- ineAtlas::get_tract_geom(2019) %>%
   left_join(
-    atlas %>% 
+    tract %>% 
       mutate(
           income_equiv_final = income_equiv_final / 0.68 # Adjust for PPP
       )
