@@ -217,38 +217,38 @@ tract <- tract %>%
   )
 
 # Get tract geometries
-esp_map <- ineAtlas::get_tract_geom(2019) %>%
-  left_join(
-    tract %>% 
-      mutate(
-          income_equiv_final = income_equiv_final / 0.68 # Adjust for PPP
-      )
-  ) %>%
-  mutate(
-    income_equiv_final = case_when(
-      income_equiv_final < 10000 ~ 10000,
-      income_equiv_final > 40000 ~ 40000,
-      TRUE ~ income_equiv_final
-    )
-  )
+# esp_map <- ineAtlas::get_tract_geom(2019) %>%
+#   left_join(
+#     tract %>% 
+#       mutate(
+#           income_equiv_final = income_equiv_final / 0.68 # Adjust for PPP
+#       )
+#   ) %>%
+#   mutate(
+#     income_equiv_final = case_when(
+#       income_equiv_final < 10000 ~ 10000,
+#       income_equiv_final > 40000 ~ 40000,
+#       TRUE ~ income_equiv_final
+#     )
+#   )
 
 # Spanish municipalities
-# esp_map <- esp_get_munic_siane() %>%
-#     left_join(
-#         atlas %>% 
-#             mutate(
-#                 income_equiv_final = income_equiv_final / 0.68, # Adjust for PPP
-#                 LAU_CODE = mun_code
-#             ),
-#         by = "LAU_CODE"
-#     ) %>%
-#     mutate(
-#       income_equiv_final = case_when(
-#         income_equiv_final < 10000 ~ 10000,
-#         income_equiv_final > 40000 ~ 40000,
-#         TRUE ~ income_equiv_final
-#       )
-#     )
+esp_map <- esp_get_munic_siane() %>%
+    left_join(
+        atlas %>% 
+            mutate(
+                income_equiv_final = income_equiv_final / 0.68, # Adjust for PPP
+                LAU_CODE = mun_code
+            ),
+        by = "LAU_CODE"
+    ) %>%
+    mutate(
+      income_equiv_final = case_when(
+        income_equiv_final < 10000 ~ 10000,
+        income_equiv_final > 40000 ~ 40000,
+        TRUE ~ income_equiv_final
+      )
+    )
 
 # Load French data ----
 

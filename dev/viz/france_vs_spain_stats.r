@@ -1,4 +1,24 @@
 
+french_ptiles <- france_map %>%
+    as.data.frame() %>%
+    select(-geom) %>%
+    mutate(net_income_equiv = ind_snv / ind) %>%
+    summarise(
+        p10 = Hmisc::wtd.quantile((ind_snv / ind)/0.8, weights = ind, probs = 0.10),
+        french_median = Hmisc::wtd.quantile((ind_snv / ind)/0.8, weights = ind, probs = 0.50),
+        p90 = Hmisc::wtd.quantile((ind_snv / ind)/0.8, weights = ind, probs = 0.90)
+    ) 
+
+spanish_ptiles <- atlas %>%
+    mutate(
+        income_equiv_final = income_equiv_final / 0.68
+    ) %>%
+    summarise(
+        p10 = Hmisc::wtd.quantile(income_equiv_final, weights = population, probs = 0.10),
+        spanish_median = Hmisc::wtd.quantile(income_equiv_final, weights = population, probs = 0.50),
+        p90 = Hmisc::wtd.quantile(income_equiv_final, weights = population, probs = 0.90)
+    ) 
+
 # Calculate French median from original grid data
 french_median <- france_map %>%
     as.data.frame() %>%
@@ -17,8 +37,6 @@ spanish_median <- tract %>%
         spanish_median = Hmisc::wtd.quantile(income_equiv_final, weights = population, probs = 0.50)
     ) %>%
     pull(spanish_median)
-
-
 
 paris_income <- france_map %>%
     as.data.frame() %>%
