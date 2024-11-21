@@ -1,3 +1,7 @@
+# ineAtlas 0.1.3
+
+* Fixed bug where `get_atlas()` was missing support for "gini_p80p20" category despite it being a documented dataset
+  
 # ineAtlas 0.1.2
 
 * Removed unnecessary `options()` settings in `get_atlas.r` and `get_tract_geom.r`

@@ -9,7 +9,7 @@ get_atlas(category, level, cache = TRUE, cache_dir = tempdir())
 \arguments{
 \item{category}{Character string specifying the data category. Must be one of:
 "income", "income_sources", "demographics", "distribution_sex",
-"distribution_sex_age", or "distribution_sex_nationality"}
+"distribution_sex_age", "distribution_sex_nationality", or "gini_p80p20"}
 
 \item{level}{Character string specifying the geographic level. Must be one of:
 "municipality", "district", or "tract"}
@@ -44,8 +44,8 @@ demo_data <- get_atlas("demographics", "district", cache = FALSE)
 # Get income distribution indicators by sex
 sex_dist <- get_atlas("distribution_sex", "municipality")
 
-# Get income distribution indicators by sex and age
-age_dist <- get_atlas("distribution_sex_age", "district")
+# Get inequality indicators including Gini coefficient
+gini_data <- get_atlas("gini_p80p20", "municipality")
 }
 
 }

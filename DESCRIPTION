@@ -1,6 +1,6 @@
 Package: ineAtlas
 Title: Access to Spanish Household Income Distribution Atlas Data
-Version: 0.1.2.9000
+Version: 0.1.3
 Authors@R: 
     person("Pablo", "García Guzmán", , "garciagp@ebrd.com", role = c("aut", "cre", "cph"))
 Description: Provides access to granular socioeconomic indicators from the

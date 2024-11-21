@@ -5,7 +5,7 @@
 #' 
 #' @param category Character string specifying the data category. Must be one of:
 #'   "income", "income_sources", "demographics", "distribution_sex",
-#'   "distribution_sex_age", or "distribution_sex_nationality"
+#'   "distribution_sex_age", "distribution_sex_nationality", or "gini_p80p20"
 #' @param level Character string specifying the geographic level. Must be one of:
 #'   "municipality", "district", or "tract"
 #' @param cache Logical indicating whether to cache the extracted data. Default is TRUE.
@@ -35,8 +35,8 @@
 #' # Get income distribution indicators by sex
 #' sex_dist <- get_atlas("distribution_sex", "municipality")
 #' 
-#' # Get income distribution indicators by sex and age
-#' age_dist <- get_atlas("distribution_sex_age", "district")
+#' # Get inequality indicators including Gini coefficient
+#' gini_data <- get_atlas("gini_p80p20", "municipality")
 #' }
 #' 
 #' @note Data files are stored compressed on the repository to reduce size and
@@ -49,7 +49,8 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
     "demographics",
     "distribution_sex",
     "distribution_sex_age",
-    "distribution_sex_nationality"
+    "distribution_sex_nationality",
+    "gini_p80p20" 
   )
   
   valid_levels <- c("municipality", "district", "tract")
@@ -71,6 +72,8 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
     filename <- paste0("distribution_sex_age/distribution_sex_age_", level, ".zip")
   } else if (category == "distribution_sex_nationality") {
     filename <- paste0("distribution_sex_nationality/distribution_sex_nationality_", level, ".zip")
+  } else if (category == "gini_p80p20") {
+    filename <- paste0("gini_p80p20/gini_p80p20_", level, ".zip")
   } else {
     filename <- paste0(category, "/", category, "_", level, ".zip")
   }
