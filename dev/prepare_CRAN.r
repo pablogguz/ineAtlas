@@ -41,6 +41,9 @@ devtools::check_win_release()
 # Need to follow the URL proposed to see the results
 devtools::check_mac_release()
 
+# Reverse dependencies 
+# tools::package_dependencies("ineAtlas", reverse = TRUE)
+
 # Update NEWS
 # Bump version manually and add list of changes
 
@@ -48,7 +51,7 @@ devtools::check_mac_release()
 usethis::use_cran_comments(open = rlang::is_interactive())
 
 # Upgrade version number
-usethis::use_version(which = c("patch", "minor", "major", "dev")[1])
+# usethis::use_version(which = c("patch", "minor", "major", "dev")[1])
 
 # Verify you're ready for release, and release
 #devtools::release()

@@ -1,7 +1,5 @@
-## Resubmission
-This is a resubmission of version 0.1.1. In this version I have:
-* Added single quotes around software names in DESCRIPTION
-* Removed unnecessary `options()` settings that were altering the user's options in `get_atlas.r` and `get_tract_geom.r` 
+## ineAtlas 0.1.3
+* Fixed bug where `get_atlas()` was missing support for "gini_p80p20" category 
 
 ## Test environments 
 * local Windows 10 install, R 4.3.1
@@ -20,9 +18,7 @@ This is a resubmission of version 0.1.1. In this version I have:
 
 ### win-builder:
 
-0 errors | 0 warnings | 1 note
-
-* checking CRAN incoming feasibility ... NOTE Maintainer: 'Pablo García Guzmán <garciagp@ebrd.com>' New submission
+0 errors | 0 warnings | 0 note
 
 ## Downstream dependencies
-New submission - there are no downstream dependencies to check.
+There are currently no downstream dependencies for this package.
