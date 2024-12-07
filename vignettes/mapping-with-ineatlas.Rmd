@@ -24,7 +24,7 @@ This vignette demonstrates how to use `ineAtlas` to create choropleth maps of so
 
 ## Load required packages
 
-First, let's load the required packages. We will use the `mapSpain`](https://ropenspain.github.io/mapSpain/) package to get the municipality geometries.
+First, let's load the required packages. We will use the [`mapSpain`](https://ropenspain.github.io/mapSpain/) package to get the municipality geometries.
 
 ```{r packages}
 library(ineAtlas)
@@ -52,7 +52,7 @@ head(mun_data)
 
 ## Get municipality geometries
 
-Now we'll get the municipality geometries from mapSpain:
+Now we'll get the municipality geometries from `mapSpain`:
 
 ```{r get-geometries}
 # Get municipality geometries
