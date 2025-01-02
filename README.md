@@ -7,7 +7,6 @@
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ineAtlas)](https://cran.r-project.org/package=ineAtlas)
 [![R-CMD-check](https://github.com/pablogguz/ineAtlas/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pablogguz/ineAtlas/actions/workflows/R-CMD-check.yaml)
 [![GitHub release](https://img.shields.io/github/v/release/pablogguz/ineAtlas)](https://github.com/pablogguz/ineAtlas/releases)
-[![CodeFactor](https://www.codefactor.io/repository/github/pablogguz/ineatlas/badge/main)](https://www.codefactor.io/repository/github/pablogguz/ineatlas/overview/main)
 <!-- badges: end -->
 
 The goal of `ineAtlas` is to provide easy access to granular socioeconomic indicators from the Spanish Statistical Office (INE) _Atlas de Distribución de Renta de los Hogares_ (Household Income Distribution Atlas). This dataset combines administrative tax data with population statistics to provide detailed information about the income distribution and related socioeconomic indicators at the municipal, district, and census tract levels.
