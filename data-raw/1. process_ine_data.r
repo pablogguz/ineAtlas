@@ -4,6 +4,7 @@
 #* ------------------------------------------------------------------------------
 
 library(tidyverse)
+library(data.table) 
 
 # Set paths
 username <- Sys.getenv("USERNAME")
@@ -11,7 +12,7 @@ username <- Sys.getenv("USERNAME")
 root <- paste0("C:/Users/", username, "/Dropbox/ineAtlas_data/")
 gitdata <- paste0("C:/Users/", username, "/Documents/GitHub/ineAtlas.data/data/")
 
-raw <- paste0(root, "/raw/")
+raw <- paste0(root, "/raw_atlasdata/")
 proc <- paste0(root, "/proc/")
 
 # INE province codes mapping
@@ -185,68 +186,21 @@ process_ine_data <- function(indicator_type) {
 
   config <- indicator_configs[[indicator_type]]
 
-  # Function to check if file contains indicators
-  has_indicators <- function(file_path) {
-    header <- readLines(file_path, n = 1)
-    cols <- strsplit(header, "\t")[[1]]
-
-    # Check main indicator column
-    has_main_col <- config$column %in% cols
-
-    # If no additional requirements, return main column check
-    if (is.null(config$required_cols) && is.null(config$excluded_cols)) {
-      return(has_main_col)
-    }
-
-    # Check required columns
-    has_required <- all(config$required_cols %in% cols)
-
-    # Check excluded columns
-    no_excluded <- !any(config$excluded_cols %in% cols)
-
-    return(has_main_col && has_required && no_excluded)
+  # Directly read the raw file based on indicator name
+  file_path <- file.path(raw, paste0(indicator_type, "_raw.csv"))
+  
+  cat(sprintf("\nReading file: %s\n", file_path))
+  
+  # Check if file exists
+  if (!file.exists(file_path)) {
+    stop(sprintf("File %s does not exist", file_path))
   }
-
-  # Find relevant files
-  files <- list.files(raw, pattern = "\\.csv$", full.names = TRUE)
-  cat("Found", length(files), "total files\n")
-
-  # Filter files
-  indicator_files <- character(0)
-  cat(sprintf("\nChecking files for %s indicators:\n", indicator_type))
-  for (file in files) {
-    if (has_indicators(file)) {
-      cat("\nFound indicators in:", basename(file))
-      indicator_files <- c(indicator_files, file)
-    }
-  }
-
-  cat("\n\nFound", length(indicator_files), indicator_type, "files\n")
-
-  if (grepl("distribution_", indicator_type)) {
-    if (length(indicator_files) != 104) {
-      cat(sprintf("\nWARNING: Found %d files but expected 104 (2 per province)\n", length(indicator_files)))
-    }
-  }
-
-  # Load and process files
-  cat("\nReading files...\n")
-
-  data_list <- list()
-  for (file in indicator_files) {
-    df <- read_delim(
-      file,
-      delim = "\t",
-      locale = locale(encoding = "UTF-8"),
-      col_types = cols(.default = col_character())
-    )
-    data_list[[length(data_list) + 1]] <- df
-  }
-
-  # Combine files
-  cat("\nBinding rows...\n")
-  all_data <- bind_rows(data_list)
-
+  
+  # Read the data using fread
+  all_data <- fread(
+    file_path
+  )
+  
   # Convert Total to numeric
   all_data <- all_data %>%
     mutate(
