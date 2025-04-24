@@ -79,7 +79,7 @@
                         <h4 data-toc-skip class="author">Pablo Garcia
 Guzman</h4>
             
-            <h4 data-toc-skip class="date">2025-01-02</h4>
+            <h4 data-toc-skip class="date">2025-04-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pablogguz/ineAtlas/blob/main/vignettes/ineAtlas-income-voting.Rmd" class="external-link"><code>vignettes/ineAtlas-income-voting.Rmd</code></a></small>
       <div class="d-none name"><code>ineAtlas-income-voting.Rmd</code></div>
@@ -101,8 +101,6 @@ from the 2021 regional elections.</p>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
-<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pablogguz/ineAtlas" class="external-link">ineAtlas</a></span><span class="op">)</span></span>
@@ -122,7 +120,7 @@ from the 2021 regional elections.</p>
 <p>First, let’s get the election data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Electoral data</span></span>
-<span><span class="va">elections_raw</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span></span>
+<span><span class="va">elections_raw</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span></span>
 <span>    <span class="st">"https://datos.comunidad.madrid/catalogo/dataset/08aac4de-ca28-4f9c-b45d-ef8457c4b5d2/resource/5e8cf4ad-b9f4-4ffd-a026-c27433e7815f/download/datos_electorales_elecciones_autonomicas_comunidad_de_madrid_2021.csv"</span>,</span>
 <span>    sep <span class="op">=</span> <span class="st">";"</span>,</span>
 <span>    encoding <span class="op">=</span> <span class="st">"Latin-1"</span></span>
