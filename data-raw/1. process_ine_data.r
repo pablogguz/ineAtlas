@@ -86,7 +86,7 @@ process_ine_data <- function(indicator_type) {
   # Define indicator column and mapping based on type
   indicator_configs <- list(
     income = list(
-      column = "Indicadores de renta media y mediana",
+      column = "Indicadores de renta media",
       required_cols = NULL,
       excluded_cols = NULL,
       mapping = c(
