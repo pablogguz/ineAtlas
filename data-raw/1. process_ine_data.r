@@ -174,7 +174,7 @@ process_ine_data <- function(indicator_type) {
       )
     ),
     gini_p80p20 = list(
-      column = "Índice de Gini y Distribución de la renta P80/P20",
+      column = "Indicadores de renta media",
       required_cols = NULL,
       excluded_cols = NULL,
       mapping = c(
@@ -186,20 +186,45 @@ process_ine_data <- function(indicator_type) {
 
   config <- indicator_configs[[indicator_type]]
 
-  # Directly read the raw file based on indicator name
-  file_path <- file.path(raw, paste0(indicator_type, "_raw.csv"))
+  # Check if this is a distribution-type file
+  is_distribution_file <- grepl("^distribution_", indicator_type)
   
-  cat(sprintf("\nReading file: %s\n", file_path))
-  
-  # Check if file exists
-  if (!file.exists(file_path)) {
-    stop(sprintf("File %s does not exist", file_path))
+  if (is_distribution_file) {
+    # For distribution files, read both _abs and _rel files and append them
+    abs_file_path <- file.path(raw, paste0(indicator_type, "_abs.csv"))
+    rel_file_path <- file.path(raw, paste0(indicator_type, "_rel.csv"))
+    
+    cat(sprintf("\nReading distribution files:\n- %s\n- %s", 
+                basename(abs_file_path), basename(rel_file_path)))
+    
+    # Check if files exist
+    if (!file.exists(abs_file_path)) {
+      stop(sprintf("File %s does not exist", abs_file_path))
+    }
+    if (!file.exists(rel_file_path)) {
+      stop(sprintf("File %s does not exist", rel_file_path))
+    }
+    
+    # Read both files and append them
+    abs_data <- fread(abs_file_path)
+    rel_data <- fread(rel_file_path)
+    
+    # Combine the data
+    all_data <- rbind(abs_data, rel_data)
+  } else {
+    # For non-distribution files, read a single file
+    file_path <- file.path(raw, paste0(indicator_type, "_raw.csv"))
+    
+    cat(sprintf("\nReading file: %s\n", file_path))
+    
+    # Check if file exists
+    if (!file.exists(file_path)) {
+      stop(sprintf("File %s does not exist", file_path))
+    }
+    
+    # Read the data
+    all_data <- fread(file_path)
   }
-  
-  # Read the data using fread
-  all_data <- fread(
-    file_path
-  )
   
   # Convert Total to numeric
   all_data <- all_data %>%
