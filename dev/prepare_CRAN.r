@@ -19,7 +19,8 @@ devtools::check(args = c("--no-manual", "--as-cran"))
 checkhelper::find_missing_tags()
 
 # Check spelling - No typo
-usethis::use_spell_check()
+# usethis::use_spell_check()
+devtools::spell_check()
 
 # Check URL are correct
 # install.packages('urlchecker', repos = 'https://r-lib.r-universe.dev')
