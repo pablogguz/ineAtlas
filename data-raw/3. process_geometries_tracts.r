@@ -35,7 +35,8 @@ out_dir <- file.path(gitdata, "geometries")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 # Years to process
-years <- 2015:2022
+# years <- 2015:2023
+years <- 2023
 
 # Function to process a single year's shapefile
 process_shapefile <- function(year) {
