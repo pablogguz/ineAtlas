@@ -3,7 +3,7 @@
 #' Downloads and extracts census tract boundary files from the ineAtlas repository,
 #' returning an sf object with the geometries for the specified year.
 #' 
-#' @param year Numeric. Year of the census tract boundaries to retrieve (2015-2022)
+#' @param year Numeric. Year of the census tract boundaries to retrieve (2015-2023)
 #' @param cache Logical indicating whether to cache the extracted data. Default is TRUE.
 #'   Cached data is stored uncompressed for faster access.
 #' @param cache_dir Character string specifying the cache directory. Default is tempdir().
@@ -33,7 +33,7 @@
 #' }
 get_tract_geom <- function(year, cache = TRUE, cache_dir = tempdir()) {
   # Validate year
-  valid_years <- 2015:2022
+  valid_years <- 2015:2023
   if (!year %in% valid_years) {
     stop("Year must be between ", min(valid_years), " and ", max(valid_years))
   }

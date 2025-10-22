@@ -1,3 +1,7 @@
+# ineAtlas 0.2.0
+
+* Modified `get_tract_geom()` function to allow for fetching 2023 geometries
+
 # ineAtlas 0.1.4
 
 * Removed `extrafont` dependency which was triggering errors
