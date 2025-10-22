@@ -42,7 +42,7 @@ download_ine_data <- function(file_code) {
   
   # Increase timeout for large files (in seconds)
   timeout_original <- getOption("timeout")
-  options(timeout = 1200)  # Set timeout to 20 minutes
+  options(timeout = 600)  # Set timeout to 10 minutes
   
   # Download and save the data
   tryCatch({
