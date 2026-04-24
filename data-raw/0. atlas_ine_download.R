@@ -22,53 +22,64 @@ package.check <- lapply(
 
 lapply(packages_to_load, require, character=T)
 
-# Set paths 
-username <- Sys.getenv("USERNAME")
+# Paths (OS-aware)
+if (.Platform$OS.type == "windows") {
+  home <- paste0("C:/Users/", Sys.getenv("USERNAME"))
+} else {
+  home <- Sys.getenv("HOME")
+}
 
-root <- paste0("C:/Users/", username, "/Dropbox/ineAtlas_data/")
+root <- file.path(home, "Dropbox", "ineAtlas_data")
+raw <- file.path(root, "raw_atlasdata")
+proc <- file.path(root, "proc")
 
-raw <- paste0(root, "/raw_atlasdata/")
-proc <- paste0(root, "/proc/")
+dir.create(raw, recursive = TRUE, showWarnings = FALSE)
 
 # Script starts ------
 
+# INE file code -> indicator name mapping.
+# Each file corresponds to an INE Atlas table at
+#   https://www.ine.es/jaxiT3/Tabla.htm?t={code}
+# File names match what `1. process_ine_data.r` expects downstream.
+file_map <- c(
+  "30824" = "income_raw",
+  "30825" = "income_sources_raw",
+  "30826" = "distribution_sex_abs",
+  "30827" = "distribution_sex_age_abs",
+  "30828" = "distribution_sex_nationality_abs",
+  "30829" = "distribution_sex_rel",
+  "30830" = "distribution_sex_age_rel",
+  "30831" = "distribution_sex_nationality_rel",
+  "30832" = "demographics_raw",
+  "37677" = "gini_p80p20_raw"
+)
+
 # Function to download and save INE data
-download_ine_data <- function(file_code) {
+download_ine_data <- function(file_code, out_name) {
   url <- paste0("https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/", file_code, ".csv?nocab=1")
-  message(paste("Downloading file code:", file_code))
-  
-  # File name is simply the code
-  file_name <- paste0(file_code, ".csv")
-  
-  # Increase timeout for large files (in seconds)
+  message(sprintf("Downloading %s (code %s)", out_name, file_code))
+
+  file_name <- paste0(out_name, ".csv")
+
   timeout_original <- getOption("timeout")
-  options(timeout = 600)  # Set timeout to 10 minutes
-  
-  # Download and save the data
+  options(timeout = 600)
+
   tryCatch({
     data <- fread(url)
-    write.csv(data, paste0(raw, file_name), row.names = FALSE)
+    write.csv(data, file.path(raw, file_name), row.names = FALSE)
     message(paste("File saved as:", file_name))
-    # Restore original timeout
     options(timeout = timeout_original)
     return(TRUE)
   }, error = function(e) {
-    message(paste("Failed to download file code:", file_code))
+    message(paste("Failed to download:", out_name))
     message(e)
-    # Restore original timeout
     options(timeout = timeout_original)
     return(FALSE)
   })
 }
 
-# List of file codes to download
-# file_codes <- c("30824", "30825", "30826", "30827", "30828", 
-#                 "30829", "30830", "30831", "30832", "37677")
-
-file_codes <- c("30830", "30831", "30832")
-
-# Download all files
-for (code in file_codes) {
-  download_ine_data(code)
+# Download all files. To download only a subset, filter `file_map` before the loop.
+for (code in names(file_map)) {
+  download_ine_data(code, file_map[[code]])
 }
 

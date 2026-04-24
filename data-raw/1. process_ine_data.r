@@ -6,14 +6,18 @@
 library(tidyverse)
 library(data.table) 
 
-# Set paths
-username <- Sys.getenv("USERNAME")
+# Paths (OS-aware)
+if (.Platform$OS.type == "windows") {
+  home <- paste0("C:/Users/", Sys.getenv("USERNAME"))
+} else {
+  home <- Sys.getenv("HOME")
+}
 
-root <- paste0("C:/Users/", username, "/Dropbox/ineAtlas_data/")
-gitdata <- paste0("C:/Users/", username, "/Documents/GitHub/ineAtlas.data/data/")
+root <- file.path(home, "Dropbox", "ineAtlas_data")
+gitdata <- file.path(home, "Documents", "GitHub", "ineAtlas.data", "data")
 
-raw <- paste0(root, "/raw_atlasdata/")
-proc <- paste0(root, "/proc/")
+raw <- file.path(root, "raw_atlasdata")
+proc <- file.path(root, "proc")
 
 # INE province codes mapping
 province_codes <- c(

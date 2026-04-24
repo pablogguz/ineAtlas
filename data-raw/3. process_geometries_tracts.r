@@ -22,13 +22,17 @@ package.check <- lapply(
 
 lapply(packages_to_load, require, character = TRUE)
 
-# Set paths 
-username <- Sys.getenv("USERNAME")
+# Paths (OS-aware)
+if (.Platform$OS.type == "windows") {
+  home <- paste0("C:/Users/", Sys.getenv("USERNAME"))
+} else {
+  home <- Sys.getenv("HOME")
+}
 
-root <- paste0("C:/Users/", username, "/Dropbox/ineAtlas_data/")
-gitdata <- paste0("C:/Users/", username, "/Documents/GitHub/ineAtlas.data/data/")
+root <- file.path(home, "Dropbox", "ineAtlas_data")
+gitdata <- file.path(home, "Documents", "GitHub", "ineAtlas.data", "data")
 
-raw <- paste0(root, "/raw_geometries/")
+raw <- file.path(root, "raw_geometries")
 out_dir <- file.path(gitdata, "geometries")
 
 # Create output directory if it doesn't exist
@@ -55,9 +59,22 @@ process_shapefile <- function(year) {
     dir.create(temp_dir)
     
     tryCatch({
-        # Extract zip file
+        # Extract zip file. INE ships these zips with CP850-encoded filenames
+        # (the ñ in "España"), which both `zip::unzip` and macOS's BSD `unzip`
+        # choke on. `ditto` on macOS and `unzip` on Linux/Windows are fine.
         cat("\nExtracting zip file...")
-        unzip(zip_file, exdir = temp_dir)
+        if (Sys.info()[["sysname"]] == "Darwin") {
+            extract_status <- system2(
+                "ditto", args = c("-x", "-k", shQuote(zip_file), shQuote(temp_dir))
+            )
+        } else {
+            extract_status <- system2(
+                "unzip", args = c("-o", "-qq", shQuote(zip_file), "-d", shQuote(temp_dir))
+            )
+        }
+        if (extract_status != 0) {
+            stop(sprintf("Extraction failed with status %d", extract_status))
+        }
         
         # Find the shapefile
         shp_file <- list.files(temp_dir, pattern = "\\.shp$", recursive = TRUE, full.names = TRUE)[1]

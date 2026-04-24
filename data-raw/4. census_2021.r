@@ -23,13 +23,17 @@ package.check <- lapply(
 
 lapply(packages_to_load, require, character = TRUE)
 
-# Set paths
-username <- Sys.getenv("USERNAME")
+# Paths (OS-aware)
+if (.Platform$OS.type == "windows") {
+  home <- paste0("C:/Users/", Sys.getenv("USERNAME"))
+} else {
+  home <- Sys.getenv("HOME")
+}
 
-root <- paste0("C:/Users/", username, "/Dropbox/ineAtlas_data/")
-gitdata <- paste0("C:/Users/", username, "/Documents/GitHub/ineAtlas.data/data/")
+root <- file.path(home, "Dropbox", "ineAtlas_data")
+gitdata <- file.path(home, "Documents", "GitHub", "ineAtlas.data", "data")
 
-raw <- paste0(root, "/raw_census/")
+raw <- file.path(root, "raw_census")
 out_dir <- file.path(gitdata, "census_2021")
 
 province_codes <- c(
