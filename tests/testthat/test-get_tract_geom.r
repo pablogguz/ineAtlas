@@ -6,12 +6,12 @@
 test_that("get_tract_geom validates input parameters", {
   # Invalid year
   expect_error(
-    get_tract_geom(2014), 
-    "Year must be between 2015 and 2022"
+    get_tract_geom(2014),
+    "Year must be between 2015 and 2025"
   )
   expect_error(
-    get_tract_geom(2023), 
-    "Year must be between 2015 and 2022"
+    get_tract_geom(2026),
+    "Year must be between 2015 and 2025"
   )
 })
 

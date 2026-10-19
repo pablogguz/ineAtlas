@@ -7,7 +7,7 @@
 get_tract_geom(year, cache = TRUE, cache_dir = tempdir())
 }
 \arguments{
-\item{year}{Numeric. Year of the census tract boundaries to retrieve (2015-2022)}
+\item{year}{Numeric. Year of the census tract boundaries to retrieve (2015-2025)}
 
 \item{cache}{Logical indicating whether to cache the extracted data. Default is TRUE.
 Cached data is stored uncompressed for faster access.}
