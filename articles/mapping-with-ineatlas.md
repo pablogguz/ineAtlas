@@ -126,7 +126,9 @@ ggplot(mun_map) +
     )
 ```
 
-![](mapping-with-ineatlas_files/figure-html/create-map-1.png)
+![plot of chunk create-map](figures/mapping-create-map-1.png)
+
+plot of chunk create-map
 
 ## Identifying high and low income areas
 

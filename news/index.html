@@ -46,6 +46,10 @@
 <h2 class="pkg-version" data-toc-text="0.2.1" id="ineatlas-021">ineAtlas 0.2.1<a class="anchor" aria-label="anchor" href="#ineatlas-021"></a></h2>
 <ul><li>
 <code><a href="../reference/get_tract_geom.html">get_tract_geom()</a></code> now fetches 2024 and 2025 geometries</li>
+<li>
+<code><a href="../reference/get_atlas.html">get_atlas()</a></code>, <code><a href="../reference/get_census.html">get_census()</a></code> and <code><a href="../reference/get_tract_geom.html">get_tract_geom()</a></code> now fail gracefully when the data repository cannot be reached: they return <code>NULL</code> with an informative message instead of an error</li>
+<li>Vignettes are precomputed, so building them does not need internet access</li>
+<li>Tests that need internet access are skipped on CRAN</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="ineatlas-020">ineAtlas 0.2.0<a class="anchor" aria-label="anchor" href="#ineatlas-020"></a></h2>

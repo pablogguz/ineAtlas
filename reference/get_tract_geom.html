@@ -79,7 +79,9 @@ Cached data is stored uncompressed for faster access.</p></dd>
 <li><p>municipality: Municipality name</p></li>
 <li><p>province: Province name</p></li>
 <li><p>geometry: Census tract boundary geometry</p></li>
-</ul></div>
+</ul><p>If the geometries cannot be downloaded and no cached copy is available,
+returns <code>NULL</code> (invisibly) with an informative message.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -89,11 +91,6 @@ Cached data is stored uncompressed for faster access.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading geometries for 2020...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Caching geometries to ineatlas_tracts_2020.gpkg</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Geometries successfully loaded: 36309 features</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Get boundaries without caching</span></span></span>
-<span class="r-in"><span><span class="va">tracts_2019</span> <span class="op">&lt;-</span> <span class="fu">get_tract_geom</span><span class="op">(</span><span class="fl">2019</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading geometries for 2019...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Geometries successfully loaded: 36317 features</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

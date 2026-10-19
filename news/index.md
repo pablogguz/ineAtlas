@@ -4,6 +4,15 @@
 
 - [`get_tract_geom()`](https://pablogguz.github.io/ineAtlas/reference/get_tract_geom.md)
   now fetches 2024 and 2025 geometries
+- [`get_atlas()`](https://pablogguz.github.io/ineAtlas/reference/get_atlas.md),
+  [`get_census()`](https://pablogguz.github.io/ineAtlas/reference/get_census.md)
+  and
+  [`get_tract_geom()`](https://pablogguz.github.io/ineAtlas/reference/get_tract_geom.md)
+  now fail gracefully when the data repository cannot be reached: they
+  return `NULL` with an informative message instead of an error
+- Vignettes are precomputed, so building them does not need internet
+  access
+- Tests that need internet access are skipped on CRAN
 
 ## ineAtlas 0.2.0
 

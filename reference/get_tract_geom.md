@@ -40,6 +40,9 @@ columns:
 
 - geometry: Census tract boundary geometry
 
+If the geometries cannot be downloaded and no cached copy is available,
+returns `NULL` (invisibly) with an informative message.
+
 ## Examples
 
 ``` r
@@ -49,10 +52,5 @@ tracts_2020 <- get_tract_geom(2020)
 #> Downloading geometries for 2020...
 #> Caching geometries to ineatlas_tracts_2020.gpkg
 #> Geometries successfully loaded: 36309 features
-
-# Get boundaries without caching
-tracts_2019 <- get_tract_geom(2019, cache = FALSE)
-#> Downloading geometries for 2019...
-#> Geometries successfully loaded: 36317 features
 # }
 ```

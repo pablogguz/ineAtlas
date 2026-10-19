@@ -38,7 +38,9 @@ get_atlas(category, level, cache = TRUE, cache_dir = tempdir())
 A tibble containing the requested data. Distribution data will include
 additional columns for demographic breakdowns (sex, age, nationality).
 The data is automatically extracted from compressed files and cached
-locally if requested.
+locally if requested. If the data cannot be downloaded and no cached
+copy is available, returns `NULL` (invisibly) with an informative
+message.
 
 ## Note
 

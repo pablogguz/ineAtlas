@@ -143,4 +143,6 @@ ggplot() +
     )
 ```
 
-![](ineAtlas-income-voting_files/figure-html/plot-1.png)
+![plot of chunk plot](figures/income-voting-plot-1.png)
+
+plot of chunk plot

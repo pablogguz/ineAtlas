@@ -33,7 +33,8 @@ A tibble containing the requested census data at the specified
 geographic level. The data includes demographic, socioeconomic and
 housing indicators from the 2021 Population and Housing Census. The data
 is automatically extracted from compressed files and cached locally if
-requested.
+requested. If the data cannot be downloaded and no cached copy is
+available, returns `NULL` (invisibly) with an informative message.
 
 ## Note
 

@@ -81,7 +81,8 @@ Cached data is stored uncompressed for faster access.</p></dd>
     <p>A tibble containing the requested census data at the specified geographic level.
 The data includes demographic, socioeconomic and housing indicators from the 2021
 Population and Housing Census. The data is automatically extracted from compressed
-files and cached locally if requested.</p>
+files and cached locally if requested. If the data cannot be downloaded and
+no cached copy is available, returns <code>NULL</code> (invisibly) with an informative message.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
