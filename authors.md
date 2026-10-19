@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/pablogguz/ineAtlas/blob/v0.2.1/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/pablogguz/ineAtlas/blob/main/DESCRIPTION)
 
 García Guzmán P (2026). *ineAtlas: Access to Spanish Household Income
 Distribution Atlas Data*. R package version 0.2.1,
