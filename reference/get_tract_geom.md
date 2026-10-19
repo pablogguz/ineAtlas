@@ -14,7 +14,7 @@ get_tract_geom(year, cache = TRUE, cache_dir = tempdir())
 
 - year:
 
-  Numeric. Year of the census tract boundaries to retrieve (2015-2022)
+  Numeric. Year of the census tract boundaries to retrieve (2015-2025)
 
 - cache:
 

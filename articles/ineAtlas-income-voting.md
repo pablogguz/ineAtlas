@@ -11,6 +11,7 @@ from the 2021 regional elections.
 ## Required packages
 
 ``` r
+
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -30,6 +31,7 @@ We’ll combine two data sources:
 First, let’s get the election data:
 
 ``` r
+
 # Electoral data
 elections_raw <- data.table::fread(
     "https://datos.comunidad.madrid/catalogo/dataset/08aac4de-ca28-4f9c-b45d-ef8457c4b5d2/resource/5e8cf4ad-b9f4-4ffd-a026-c27433e7815f/download/datos_electorales_elecciones_autonomicas_comunidad_de_madrid_2021.csv",
@@ -41,6 +43,7 @@ elections_raw <- data.table::fread(
 Now, let’s get income data for Madrid’s census tracts using `ineAtlas`:
 
 ``` r
+
 # Get income data from ineAtlas
 income_data <- get_atlas("income", "tract") %>%
     # Filter for Madrid region
@@ -53,6 +56,7 @@ income_data <- get_atlas("income", "tract") %>%
 We need to process the election data and merge it with our income data:
 
 ``` r
+
 # Process election data to census tract level
 elections_proc <- elections_raw %>%
     select(PP, `P.S.O.E.`, distrito, seccion, cod_muni, votos_electores) %>%
@@ -94,6 +98,7 @@ on the vote share of the two main parties, the Popular Party (PP) and
 the Socialist Party (PSOE):
 
 ``` r
+
 ggplot() +
     geom_point(data = plot_data,
                aes(x = income_percentile * 100, 

@@ -53,23 +53,23 @@ download times. The function handles decompression automatically.
 income_data <- get_atlas("income", "municipality")
 #> Downloading data from income_municipality.zip...
 #> Caching data to ineatlas_income_municipality.csv
-#> Data successfully loaded: 73251 rows, 11 columns
+#> Data successfully loaded: 81390 rows, 11 columns
 
 # Get district level demographics without caching
 demo_data <- get_atlas("demographics", "district", cache = FALSE)
 #> Downloading data from demographics_district.zip...
-#> Data successfully loaded: 94662 rows, 13 columns
+#> Data successfully loaded: 105170 rows, 13 columns
 
 # Get income distribution indicators by sex
 sex_dist <- get_atlas("distribution_sex", "municipality")
 #> Downloading data from distribution_sex_municipality.zip...
 #> Caching data to ineatlas_distribution_sex_municipality.csv
-#> Data successfully loaded: 219753 rows, 15 columns
+#> Data successfully loaded: 244170 rows, 15 columns
 
 # Get inequality indicators including Gini coefficient
 gini_data <- get_atlas("gini_p80p20", "municipality")
 #> Downloading data from gini_p80p20_municipality.zip...
 #> Caching data to ineatlas_gini_p80p20_municipality.csv
-#> Data successfully loaded: 73251 rows, 7 columns
+#> Data successfully loaded: 81390 rows, 7 columns
 # }
 ```

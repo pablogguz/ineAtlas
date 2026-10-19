@@ -26,18 +26,18 @@ Windows:
     output filename. URL:
     `https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/{code}.csv?nocab=1`.
 
-    | code  | saved as                           | content                                              |
-    |-------|------------------------------------|------------------------------------------------------|
-    | 30824 | `income_raw`                       | Income indicators (net/gross, per person/hh/equiv)   |
-    | 30825 | `income_sources_raw`               | Income by source (wage, pension, benefits, …)        |
-    | 30826 | `distribution_sex_abs`             | Income distribution by sex — absolute thresholds (€) |
-    | 30827 | `distribution_sex_age_abs`         | … by sex × age — absolute                            |
-    | 30828 | `distribution_sex_nationality_abs` | … by sex × nationality — absolute                    |
-    | 30829 | `distribution_sex_rel`             | … by sex — relative (% of median)                    |
-    | 30830 | `distribution_sex_age_rel`         | … by sex × age — relative                            |
-    | 30831 | `distribution_sex_nationality_rel` | … by sex × nationality — relative                    |
-    | 30832 | `demographics_raw`                 | Demographics (age, household size, % Spanish, …)     |
-    | 37677 | `gini_p80p20_raw`                  | Gini, P80/P20                                        |
+    | code | saved as | content |
+    |----|----|----|
+    | 30824 | `income_raw` | Income indicators (net/gross, per person/hh/equiv) |
+    | 30825 | `income_sources_raw` | Income by source (wage, pension, benefits, …) |
+    | 30826 | `distribution_sex_abs` | Income distribution by sex — absolute thresholds (€) |
+    | 30827 | `distribution_sex_age_abs` | … by sex × age — absolute |
+    | 30828 | `distribution_sex_nationality_abs` | … by sex × nationality — absolute |
+    | 30829 | `distribution_sex_rel` | … by sex — relative (% of median) |
+    | 30830 | `distribution_sex_age_rel` | … by sex × age — relative |
+    | 30831 | `distribution_sex_nationality_rel` | … by sex × nationality — relative |
+    | 30832 | `demographics_raw` | Demographics (age, household size, % Spanish, …) |
+    | 37677 | `gini_p80p20_raw` | Gini, P80/P20 |
 
 2.  **`1. process_ine_data.r`** — defines
     `process_ine_data(indicator_type)`. Sourced by script 2, not run
@@ -68,6 +68,7 @@ When INE releases new data (check table `30824` first row for the latest
 year):
 
 ``` r
+
 source("data-raw/0. atlas_ine_download.R")   # refresh raw CSVs (10+ GB)
 source("data-raw/2. run_processing.r")       # rebuild 7 indicator outputs
 # Bump `years` in script 3 to include the new year, then:

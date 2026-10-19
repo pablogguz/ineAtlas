@@ -19,15 +19,15 @@ geographic levels:
 
 ### Available datasets
 
-| Dataset                                  | Description                                                                  |
-|------------------------------------------|------------------------------------------------------------------------------|
-| Income                                   | Income indicators including net/gross (equivalised) income per capita        |
-| Income sources                           | Income indicators by source (wages, pensions, benefits, etc.)                |
-| Demographics                             | Population characteristics including age structure and household composition |
-| Distribution by sex                      | Income distribution indicators disaggregated by sex                          |
-| Distribution by sex and age              | Income distribution indicators by sex and age categories                     |
-| Distribution by sex, age and nationality | Income distribution indicators by sex and nationality status                 |
-| Inequality indicators                    | Inequality metrics including Gini coefficient and P80/P20 ratio              |
+| Dataset | Description |
+|----|----|
+| Income | Income indicators including net/gross (equivalised) income per capita |
+| Income sources | Income indicators by source (wages, pensions, benefits, etc.) |
+| Demographics | Population characteristics including age structure and household composition |
+| Distribution by sex | Income distribution indicators disaggregated by sex |
+| Distribution by sex and age | Income distribution indicators by sex and age categories |
+| Distribution by sex, age and nationality | Income distribution indicators by sex and nationality status |
+| Inequality indicators | Inequality metrics including Gini coefficient and P80/P20 ratio |
 
 All the data is stored in the accompanying
 [`ineAtlas.data`](https://github.com/pablogguz/ineAtlas.data/)
@@ -39,6 +39,7 @@ the data structure at <https://pablogguz.github.io/ineAtlas.data/>.
 You can install the released version of `ineAtlas` from CRAN with:
 
 ``` r
+
 install.packages("ineAtlas")
 ```
 
@@ -46,6 +47,7 @@ Alternatively, you can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("pablogguz/ineAtlas")
 ```
@@ -55,6 +57,7 @@ pak::pak("pablogguz/ineAtlas")
 Here’s a basic example of fetching census tract-level income data:
 
 ``` r
+
 library(ineAtlas)
 
 # Get municipality-level income data

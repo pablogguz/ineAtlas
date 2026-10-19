@@ -1,5 +1,10 @@
 # Changelog
 
+## ineAtlas 0.2.1
+
+- [`get_tract_geom()`](https://pablogguz.github.io/ineAtlas/reference/get_tract_geom.md)
+  now fetches 2024 and 2025 geometries
+
 ## ineAtlas 0.2.0
 
 - Modified

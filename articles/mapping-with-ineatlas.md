@@ -10,6 +10,7 @@ First, let’s load the required packages. We will use the
 municipality geometries.
 
 ``` r
+
 library(ineAtlas)
 library(mapSpain)
 library(dplyr)
@@ -23,6 +24,7 @@ Let’s fetch income data for all Spanish municipalities for the year
 2022:
 
 ``` r
+
 # Get municipality level income data
 mun_data <- get_atlas(
     category = "income",
@@ -50,6 +52,7 @@ head(mun_data)
 Now we’ll get the municipality geometries from `mapSpain`:
 
 ``` r
+
 # Get municipality geometries
 mun_map <- esp_get_munic_siane() %>%
     # Join with our income data
@@ -88,6 +91,7 @@ Let’s create a map showing net income per capita across Spanish
 municipalities:
 
 ``` r
+
 # Create the map
 ggplot(mun_map) +
     geom_sf(
@@ -129,6 +133,7 @@ ggplot(mun_map) +
 Let’s find the top 10 municipalities by net income per capita:
 
 ``` r
+
 mun_data %>%
   arrange(desc(net_income_pc)) %>%
   select(mun_name, net_income_pc) %>%
@@ -141,7 +146,7 @@ mun_data %>%
 #>    <chr>                            <dbl>
 #>  1 Pozuelo de Alarcón               29258
 #>  2 Oroz-Betelu/Orotz-Betelu         25780
-#>  3 Goñi                             25532
+#>  3 Val de Goñi/Goñerri              25532
 #>  4 Matadepera                       24814
 #>  5 Bolvir                           24812
 #>  6 Boadilla del Monte               24748
@@ -154,6 +159,7 @@ mun_data %>%
 And the bottom 10:
 
 ``` r
+
 mun_data %>%
   arrange(net_income_pc) %>%
   select(mun_name, net_income_pc) %>%
