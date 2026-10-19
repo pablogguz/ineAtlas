@@ -13,7 +13,8 @@
 #' @return A tibble containing the requested census data at the specified geographic level.
 #'   The data includes demographic, socioeconomic and housing indicators from the 2021
 #'   Population and Housing Census. The data is automatically extracted from compressed 
-#'   files and cached locally if requested.
+#'   files and cached locally if requested. If the data cannot be downloaded and
+#'   no cached copy is available, returns `NULL` (invisibly) with an informative message.
 #' 
 #' @importFrom dplyr %>% filter select mutate
 #' @importFrom readr read_csv write_csv
@@ -118,7 +119,8 @@ get_census <- function(level, cache = TRUE, cache_dir = tempdir()) {
       message("Data successfully loaded from cache: ", nrow(data), " rows, ", ncol(data), " columns")
       return(data)
     } else {
-      stop("Failed to download data and no cache available. Error: ", e$message)
+      message("Failed to download data and no cache available. Error: ", e$message)
+      return(invisible(NULL))
     }
   })
 }

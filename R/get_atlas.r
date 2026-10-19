@@ -15,7 +15,8 @@
 #' @return A tibble containing the requested data. Distribution data will include
 #'   additional columns for demographic breakdowns (sex, age, nationality).
 #'   The data is automatically extracted from compressed files and cached
-#'   locally if requested.
+#'   locally if requested. If the data cannot be downloaded and no cached copy
+#'   is available, returns `NULL` (invisibly) with an informative message.
 #' 
 #' @importFrom dplyr %>% filter select mutate
 #' @importFrom readr read_csv write_csv
@@ -145,7 +146,8 @@ get_atlas <- function(category, level, cache = TRUE, cache_dir = tempdir()) {
       message("Data successfully loaded from cache: ", nrow(data), " rows, ", ncol(data), " columns")
       return(data)
     } else {
-      stop("Failed to download data and no cache available. Error: ", e$message)
+      message("Failed to download data and no cache available. Error: ", e$message)
+      return(invisible(NULL))
     }
   })
 }

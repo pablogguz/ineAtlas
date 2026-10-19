@@ -23,7 +23,8 @@ Cached data is stored uncompressed for faster access.}
 A tibble containing the requested data. Distribution data will include
 additional columns for demographic breakdowns (sex, age, nationality).
 The data is automatically extracted from compressed files and cached
-locally if requested.
+locally if requested. If the data cannot be downloaded and no cached copy
+is available, returns \code{NULL} (invisibly) with an informative message.
 }
 \description{
 Downloads and extracts compressed data files from the ineAtlas data repository,

@@ -2,24 +2,16 @@
 title: "Linking census tract-level income data to electoral outcomes with ineAtlas"
 output: rmarkdown::html_vignette
 author: "Pablo Garcia Guzman"
-date: "`r Sys.Date()`"
+date: "2026-10-19"
 vignette: >
   %\VignetteIndexEntry{Linking census tract-level income data to electoral outcomes with ineAtlas}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.width = 10,
-  fig.height = 7,
-  dpi = 300,
-  message = FALSE,
-  warning = FALSE
-)
-```
+<!-- Precomputed vignette: edit ineAtlas-income-voting.Rmd.orig and re-knit it with dev/precompute_vignettes.r -->
+
+
 
 ## Introduction
 
@@ -27,7 +19,8 @@ This vignette demonstrates how to combine data from the Spanish Statistical Offi
 
 ## Required packages
 
-```{r packages}
+
+``` r
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -46,7 +39,8 @@ We'll combine two data sources:
 
 First, let's get the election data:
 
-```{r elections-data}
+
+``` r
 # Electoral data
 elections_raw <- data.table::fread(
     "https://datos.comunidad.madrid/catalogo/dataset/08aac4de-ca28-4f9c-b45d-ef8457c4b5d2/resource/5e8cf4ad-b9f4-4ffd-a026-c27433e7815f/download/datos_electorales_elecciones_autonomicas_comunidad_de_madrid_2021.csv",
@@ -57,7 +51,8 @@ elections_raw <- data.table::fread(
 
 Now, let's get income data for Madrid's census tracts using `ineAtlas`:
 
-```{r income-data}
+
+``` r
 # Get income data from ineAtlas
 income_data <- get_atlas("income", "tract") %>%
     # Filter for Madrid region
@@ -69,7 +64,8 @@ income_data <- get_atlas("income", "tract") %>%
 
 We need to process the election data and merge it with our income data:
 
-```{r data-processing}
+
+``` r
 # Process election data to census tract level
 elections_proc <- elections_raw %>%
     select(PP, `P.S.O.E.`, distrito, seccion, cod_muni, votos_electores) %>%
@@ -107,7 +103,8 @@ plot_data <- elections_proc %>%
 
 We'll create a visualization showing how voting patterns vary with income levels across Madrid's census tracts. In particular, we'll focus on the vote share of the two main parties, the Popular Party (PP) and the Socialist Party (PSOE):
 
-```{r plot, fig.width=10, fig.height=7}
+
+``` r
 ggplot() +
     geom_point(data = plot_data,
                aes(x = income_percentile * 100, 
@@ -151,3 +148,8 @@ ggplot() +
         panel.grid.major.x = element_blank()
     )
 ```
+
+<div class="figure">
+<img src="figures/income-voting-plot-1.png" alt="plot of chunk plot" width="100%" />
+<p class="caption">plot of chunk plot</p>
+</div>

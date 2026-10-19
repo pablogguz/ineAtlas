@@ -23,6 +23,8 @@ An sf object containing census tract boundaries with the following columns:
 \item province: Province name
 \item geometry: Census tract boundary geometry
 }
+If the geometries cannot be downloaded and no cached copy is available,
+returns \code{NULL} (invisibly) with an informative message.
 }
 \description{
 Downloads and extracts census tract boundary files from the ineAtlas repository,
@@ -32,8 +34,5 @@ returning an sf object with the geometries for the specified year.
 \donttest{
 # Get census tract boundaries for 2020
 tracts_2020 <- get_tract_geom(2020)
-
-# Get boundaries without caching
-tracts_2019 <- get_tract_geom(2019, cache = FALSE)
 }
 }

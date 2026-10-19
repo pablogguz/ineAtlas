@@ -80,6 +80,15 @@ test_that("get_atlas validates input parameters correctly", {
   )
 })
 
+test_that("get_atlas fails gracefully when the download fails", {
+  stub(get_atlas, 'httr::GET', function(...) stop("Could not resolve host"))
+  expect_message(
+    result <- get_atlas("income", "municipality", cache = FALSE),
+    "Failed to download data"
+  )
+  expect_null(result)
+})
+
 test_that("get_atlas constructs correct URLs for zip files", {
   expected_url <- "https://raw.githubusercontent.com/pablogguz/ineAtlas.data/main/data/income/income_municipality.zip"
   

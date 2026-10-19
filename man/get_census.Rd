@@ -19,7 +19,8 @@ Cached data is stored uncompressed for faster access.}
 A tibble containing the requested census data at the specified geographic level.
 The data includes demographic, socioeconomic and housing indicators from the 2021
 Population and Housing Census. The data is automatically extracted from compressed
-files and cached locally if requested.
+files and cached locally if requested. If the data cannot be downloaded and
+no cached copy is available, returns \code{NULL} (invisibly) with an informative message.
 }
 \description{
 Downloads and extracts compressed census data files from the ineAtlas data repository,

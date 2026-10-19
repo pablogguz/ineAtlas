@@ -1,6 +1,11 @@
 # ineAtlas 0.2.1
 
 * `get_tract_geom()` now fetches 2024 and 2025 geometries
+* `get_atlas()`, `get_census()` and `get_tract_geom()` now fail gracefully when the data
+  repository cannot be reached: they return `NULL` with an informative message
+  instead of an error
+* Vignettes are precomputed, so building them does not need internet access
+* Tests that need internet access are skipped on CRAN
 
 # ineAtlas 0.2.0
 

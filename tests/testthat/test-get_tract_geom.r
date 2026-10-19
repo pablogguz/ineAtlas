@@ -15,7 +15,17 @@ test_that("get_tract_geom validates input parameters", {
   )
 })
 
+test_that("get_tract_geom fails gracefully when the download fails", {
+  mockery::stub(get_tract_geom, "httr::GET", function(...) stop("Could not resolve host"))
+  expect_message(
+    result <- get_tract_geom(2015, cache = FALSE),
+    "Failed to download geometries"
+  )
+  expect_null(result)
+})
+
 test_that("get_tract_geom returns correct object type", {
+  skip_on_cran()
   skip_if_offline()
   
   # Test with minimal data to keep test fast
@@ -35,6 +45,7 @@ test_that("get_tract_geom returns correct object type", {
 })
 
 test_that("get_tract_geom caching works", {
+  skip_on_cran()
   skip_if_offline()
   
   # Create temp cache dir

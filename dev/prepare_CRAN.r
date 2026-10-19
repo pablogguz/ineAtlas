@@ -3,6 +3,9 @@
 # Update dependencies in DESCRIPTION
 attachment::att_amend_desc()
 
+# Re-knit precomputed vignettes (needs internet)
+source("dev/precompute_vignettes.r")
+
 # Run tests
 devtools::test()
 testthat::test_dir("tests/testthat/")

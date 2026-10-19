@@ -16,6 +16,8 @@
 #'     \item province: Province name
 #'     \item geometry: Census tract boundary geometry
 #'   }
+#'   If the geometries cannot be downloaded and no cached copy is available,
+#'   returns `NULL` (invisibly) with an informative message.
 #' 
 #' @importFrom sf st_read
 #' @importFrom httr GET stop_for_status write_disk
@@ -27,9 +29,6 @@
 #' \donttest{
 #' # Get census tract boundaries for 2020
 #' tracts_2020 <- get_tract_geom(2020)
-#' 
-#' # Get boundaries without caching
-#' tracts_2019 <- get_tract_geom(2019, cache = FALSE)
 #' }
 get_tract_geom <- function(year, cache = TRUE, cache_dir = tempdir()) {
   # Validate year
@@ -108,7 +107,8 @@ get_tract_geom <- function(year, cache = TRUE, cache_dir = tempdir()) {
       message("Geometries successfully loaded from cache: ", nrow(data), " features")
       return(data)
     } else {
-      stop("Failed to download geometries and no cache available. Error: ", e$message)
+      message("Failed to download geometries and no cache available. Error: ", e$message)
+      return(invisible(NULL))
     }
   })
 }
